@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { commonStyles } from '../styles/commonStyles';
 // import { supabase } from '../api/supabase';
 
 type RootStackParamList = {
@@ -23,35 +24,11 @@ export default function Home({ navigation }: Props) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>¡Bienvenido a la página de inicio!</Text>
-      <TouchableOpacity style={styles.button} onPress={handleSignOut}>
-        <Text style={styles.buttonText}>Cerrar Sesión</Text>
+    <View style={commonStyles.container}>
+      <Text style={commonStyles.text}>¡Bienvenido a la página de inicio!</Text>
+      <TouchableOpacity style={commonStyles.button} onPress={handleSignOut}>
+        <Text style={commonStyles.buttonText}>Cerrar Sesión</Text>
       </TouchableOpacity>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f8f9fa',
-  },
-  text: {
-    fontSize: 18,
-    color: '#212529',
-    marginBottom: 20,
-  },
-  button: {
-    backgroundColor: '#dc3545',
-    padding: 10,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: '#ffffff',
-    fontSize: 16,
-  },
-});
-
