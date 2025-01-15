@@ -31,12 +31,16 @@ export const commonStyles = StyleSheet.create({
         fontSize: fontSize.titleLg,
         color: colors.sg2,
     },
+    span: {
+        fontSize: fontSize.textSm,
+        color: colors.sg2,
+    },
     button: {
         backgroundColor: colors.sg2,
         borderRadius: 5,
         color: colors.sg2,
         fontWeight: 'bold',
-        borderColor: colors.sg2,
+        borderColor: colors.sg5,
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 1,
@@ -50,7 +54,7 @@ export const commonStyles = StyleSheet.create({
     },
     input: {
         color: colors.sg2,
-        fontWeight: 'bold',
+        fontWeight: 'normal',
         borderRadius: 8,
         borderColor: colors.sg2,
         borderWidth: 1,
@@ -61,5 +65,6 @@ export const commonStyles = StyleSheet.create({
     linkText: {
         color: colors.sg2,
         fontSize: 14,
+        alignItems: 'flex-end',
     }
 });
