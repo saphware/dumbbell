@@ -68,5 +68,15 @@ export const commonStyles = StyleSheet.create({
         color: colors.sg2,
         fontSize: 14,
         alignItems: 'flex-end',
+    },
+    topNavbar: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: "#fff",
+        padding: 10,
+        alignItems: "center",
+        height: 60,
     }
 });
