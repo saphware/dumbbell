@@ -10,11 +10,15 @@ export const fontSize = {
 }
 
 export const colors = {
+    white: '#ffffff',
+    black: '#000000',
+    gray: '#898989',
+    FireOn: '#DC2302',
     sg1: '#1C352E',
     sg2: '#DBD6C9',
     sg3: '#CBAA7B',
     sg4: '#92948A',
-    sg5: '#898989',
+    sg5: '#132B24',
 }
 
 export const commonStyles = StyleSheet.create({
@@ -29,14 +33,6 @@ export const commonStyles = StyleSheet.create({
         color: colors.sg2,
         gap: 12,
     },
-    text: {
-        fontSize: fontSize.titleLg,
-        color: colors.sg2,
-    },
-    span: {
-        fontSize: fontSize.textSm,
-        color: colors.sg2,
-    },
     button: {
         backgroundColor: colors.sg2,
         borderRadius: 5,
@@ -49,11 +45,6 @@ export const commonStyles = StyleSheet.create({
         width: '100%',
         height: 52,
     },
-    buttonText: {
-        color: colors.sg1,
-        fontWeight: 'bold',
-        fontSize: fontSize.titleMd,
-    },
     input: {
         color: colors.sg2,
         fontWeight: 'normal',
@@ -64,19 +55,4 @@ export const commonStyles = StyleSheet.create({
         height: 52,
         paddingHorizontal: 10,
     },
-    linkText: {
-        color: colors.sg2,
-        fontSize: 14,
-        alignItems: 'flex-end',
-    },
-    topNavbar: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: "#fff",
-        padding: 10,
-        alignItems: "center",
-        height: 60,
-    }
 });

@@ -1,6 +1,10 @@
 import { Text } from 'react-native';
 import { Redirect, Slot, Stack } from 'expo-router';
 import { useSession } from '@/providers/AuthContext';
+import TopNavbar from '@/components/nav/TopNavbar';
+import BottomNavbar from '@/components/nav/BottomNavbar';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { commonStyles } from '@/style/commonStyles';
 
 export default function AppLayout() {
   const { session, isLoading } = useSession();
@@ -13,5 +17,11 @@ export default function AppLayout() {
     return <Redirect href="/auth" />;
   }
 
-  return <Slot />;
+  return (
+    <SafeAreaProvider style={commonStyles.container}>
+      <TopNavbar />
+      <Slot />
+      <BottomNavbar />
+    </SafeAreaProvider>
+  )
 }

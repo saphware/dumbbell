@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { Link, useLocalSearchParams } from 'expo-router';
 import { commonStyles } from '@/style/commonStyles';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { textStyles } from '@/style/textStyles';
 
 
 export default function recipe() {
@@ -11,7 +12,7 @@ export default function recipe() {
       <TouchableOpacity style={commonStyles.button}>
         <Link href={"/"}>Go Home</Link>
       </TouchableOpacity>
-      <Text style={commonStyles.text}>Details of recipe {id} </Text>
+      <Text style={textStyles.textMd}>Details of recipe {id} </Text>
     </SafeAreaProvider>
   );
 }
