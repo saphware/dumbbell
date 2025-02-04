@@ -18,7 +18,7 @@ export default function AppLayout() {
   }
 
   return (
-    <SafeAreaProvider style={commonStyles.container}>
+    <SafeAreaProvider style={commonStyles.mainContainer}>
       <TopNavbar />
       <Slot />
       <BottomNavbar />

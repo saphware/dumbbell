@@ -1,24 +1,15 @@
 import { StyleSheet } from 'react-native';
+import { colors } from './commonStyles';
 
 export const inputStyles = StyleSheet.create({
-    topNav: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: "#fff",
-        padding: 10,
-        alignItems: "center",
-        height: 60,
+    input: {
+        color: colors.sg2,
+        fontWeight: 'normal',
+        borderRadius: 8,
+        borderColor: colors.sg2,
+        borderWidth: 1,
+        width: '100%',
+        height: 52,
+        paddingHorizontal: 10,
     },
-    bottomNav: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: "#fff",
-        padding: 10,
-        alignItems: "center",
-        height: 60,
-    }
 })

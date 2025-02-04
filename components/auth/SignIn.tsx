@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
 import { commonStyles } from '@/style/commonStyles';
 import { Link, router } from 'expo-router';
 import { supabase } from '@/lib/supabase';
+import { textStyles } from '@/style/textStyles';
+import { buttonStyles } from '@/style/buttonStyles';
+import { inputStyles } from '@/style/inputStyles';
+import HeroImage from '../HeroImage';
 
 export default function SignIn({ setSignIn }: { setSignIn: (value: boolean) => void }) {
     const [email, setEmail] = useState('');
@@ -22,10 +26,15 @@ export default function SignIn({ setSignIn }: { setSignIn: (value: boolean) => v
     }
 
     return (
-        <View style={commonStyles.container}>
-            <Text style={commonStyles.text}>SignIn</Text>
+        <View style={commonStyles.mainContainer}>
+
+            {/* <HeroImage /> */}
+            {/* <Image source={}/> */}
+
+            <Text style={textStyles.titleLg}>SignIn</Text>
+
             <TextInput
-                style={commonStyles.input}
+                style={inputStyles.input}
                 placeholder="Correo electrónico"
                 value={email}
                 onChangeText={setEmail}
@@ -33,25 +42,31 @@ export default function SignIn({ setSignIn }: { setSignIn: (value: boolean) => v
                 placeholderTextColor='#DBD6C9'
             />
             <TextInput
-                style={commonStyles.input}
+                style={inputStyles.input}
                 placeholder="Contraseña"
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
                 placeholderTextColor='#DBD6C9'
             />
-            <TouchableOpacity style={commonStyles.button} onPress={handleSignIn}>
-                <Text style={commonStyles.buttonText}>Iniciar Sesión</Text>
+
+            <TouchableOpacity style={buttonStyles.button} onPress={handleSignIn}>
+                <Text style={textStyles.textMd}>Iniciar Sesión</Text>
             </TouchableOpacity>
-            <Text style={commonStyles.span}>O iniciar con</Text>
+
+
             <TouchableOpacity>
-                <Text style={commonStyles.span}>Olvide mi contraseña. Recuperar.</Text>
+                <Text style={textStyles.span}>Olvide mi contraseña. Recuperar.</Text>
             </TouchableOpacity>
+
+            {/* <Text style={textStyles.span}>O iniciar con</Text> */}
+
             {/* <TouchableOpacity style={commonStyles.button} onPress={handleSignInWithGoogle}>
                 <Text style={commonStyles.buttonText}>Google</Text>
             </TouchableOpacity> */}
+
             <TouchableOpacity onPress={handleToggleSignUp}>
-                <Text style={commonStyles.span}>¿No tienes una cuenta? Crear cuenta.</Text>
+                <Text style={textStyles.span}>¿No tienes una cuenta? Crear cuenta.</Text>
             </TouchableOpacity>
         </View>
     );

@@ -3,6 +3,9 @@ import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { commonStyles } from '@/style/commonStyles';
 import { supabase } from '@/lib/supabase';
+import { textStyles } from '@/style/textStyles';
+import { inputStyles } from '@/style/inputStyles';
+import { buttonStyles } from '@/style/buttonStyles';
 
 export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => void }) {
     const [email, setEmail] = useState('');
@@ -31,9 +34,9 @@ export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => v
 
     return (
         <View style={commonStyles.container}>
-            <Text style={commonStyles.text}>SignUp</Text>
+            <Text style={textStyles.titleLg}>SignUp</Text>
             <TextInput
-                style={commonStyles.input}
+                style={inputStyles.input}
                 placeholder="Correo electrónico"
                 value={email}
                 onChangeText={setEmail}
@@ -42,7 +45,7 @@ export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => v
                 placeholderTextColor='#DBD6C9'
             />
             <TextInput
-                style={commonStyles.input}
+                style={inputStyles.input}
                 placeholder="Contraseña"
                 value={password}
                 onChangeText={setPassword}
@@ -50,18 +53,18 @@ export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => v
                 placeholderTextColor='#DBD6C9'
             />
             <TextInput
-                style={commonStyles.input}
+                style={inputStyles.input}
                 placeholder="Confirmar Contraseña"
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
                 secureTextEntry
                 placeholderTextColor='#DBD6C9'
             />
-            <TouchableOpacity style={commonStyles.button} onPress={handleSignUp}>
-                <Text style={commonStyles.buttonText}>Registrarse</Text>
+            <TouchableOpacity style={buttonStyles.button} onPress={handleSignUp}>
+                <Text style={textStyles.textMd}>Registrarse</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={handleToggleSignIn}>
-                <Text style={commonStyles.span}>¿Ya tienes una cuenta? Inicia sesión</Text>
+                <Text style={textStyles.span}>¿Ya tienes una cuenta? Inicia sesión</Text>
             </TouchableOpacity>
         </View>
     );
