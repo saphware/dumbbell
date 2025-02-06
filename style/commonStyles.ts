@@ -37,6 +37,7 @@ export const commonStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-end',
         padding: 10,
+        gap: 6,
     },
     overlay: {
         position: "absolute",
