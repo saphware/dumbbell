@@ -3,17 +3,18 @@ import { buttonStyles } from '@/style/buttonStyles';
 import { commonStyles } from '@/style/commonStyles';
 import { inputStyles } from '@/style/inputStyles';
 import { textStyles } from '@/style/textStyles';
-import { Image } from 'expo-image';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 
 export default function goals() {
   const profile = useProfile();
+  const daysInAWeek = 7;
+
   return (
     <View style={commonStyles.container}>
 
       <Text style={textStyles.textLg}>Entrenamiento Semanal</Text>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', padding: 10 }}>
-        {[...Array(7)].map((_, index) => (
+        {[...Array(daysInAWeek)].map((_, index) => (
           <View
             key={index}
             style={{
