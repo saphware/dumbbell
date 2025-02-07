@@ -9,7 +9,7 @@ export default function Auth() {
     const [signIn, setSignIn] = useState(true)
 
     return (
-        <SafeAreaView style={commonStyles.container}>
+        <SafeAreaView style={commonStyles.mainContainer}>
             {
                 signIn ? <SignIn setSignIn={setSignIn}/> : <SignUp setSignIn={setSignIn}/>
             }

@@ -26,7 +26,7 @@ export default function SignIn({ setSignIn }: { setSignIn: (value: boolean) => v
     }
 
     return (
-        <View style={commonStyles.mainContainer}>
+        <View style={commonStyles.container}>
 
             {/* <HeroImage /> */}
             {/* <Image source={}/> */}

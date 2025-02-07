@@ -6,62 +6,12 @@ import { Link } from 'expo-router'
 import React from 'react'
 import { FlatList, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { useRecipes } from '@/hooks/useRecipes'
 
 export default function recipes() {
-
-  const mockRecipes = [
-    {
-      id_recipe: 1,
-      title: "Pollo a la Parrilla",
-      content: "Deliciosa receta de pollo marinado y asado",
-      image_url: "https://example.com/pollo-parrilla.jpg"
-    },
-    {
-      id_recipe: 2,
-      title: "Ensalada César",
-      content: "Clásica ensalada con aderezo césar y crutones",
-      image_url: "https://example.com/ensalada-cesar.jpg"
-    },
-    {
-      id_recipe: 3,
-      title: "Pasta Alfredo",
-      content: "Pasta cremosa con salsa alfredo casera",
-      image_url: "https://example.com/pasta-alfredo.jpg"
-    },
-    {
-      id_recipe: 4,
-      title: "Ensalada César",
-      content: "Clásica ensalada con aderezo césar y crutones",
-      image_url: "https://example.com/ensalada-cesar.jpg"
-    },
-    {
-      id_recipe: 5,
-      title: "Ñoquis de la abuela",
-      content: "Ñoquis de la abuela",
-      image_url: "https://example.com/pasta-alfredo.jpg"
-    },
-    {
-      id_recipe: 6,
-      title: "Ñoquis de la abuela",
-      content: "Ñoquis de la abuela",
-      image_url: "https://example.com/pasta-alfredo.jpg"
-    },
-    {
-      id_recipe: 7,
-      title: "Ñoquis de la abuela",
-      content: "Ñoquis de la abuela",
-      image_url: "https://example.com/pasta-alfredo.jpg"
-    },
-    {
-      id_recipe: 8,
-      title: "Ñoquis de la abuela",
-      content: "Ñoquis de la abuela",
-      image_url: "https://example.com/pasta-alfredo.jpg"
-    }
-  ];
-
+  const { recipes } = useRecipes();
   const [searchQuery, setSearchQuery] = React.useState('');
-  const filteredRecipes = mockRecipes.filter(recipe =>
+  const filteredRecipes = recipes.filter(recipe =>
     recipe.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
