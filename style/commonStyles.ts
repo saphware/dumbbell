@@ -38,6 +38,16 @@ export const commonStyles = StyleSheet.create({
         paddingVertical: 18,
         gap: 6,
     },
+    containerNavbars: {
+        flex: 1,
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        paddingHorizontal: 18,
+        paddingVertical: 70,
+        gap: 6,
+    },
     content: {
         flex: 1,
         width: '100%',

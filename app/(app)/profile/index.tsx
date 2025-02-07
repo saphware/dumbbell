@@ -19,7 +19,7 @@ export default function Profile() {
   };
 
   return (
-    <SafeAreaProvider style={commonStyles.container}>
+    <SafeAreaProvider style={commonStyles.containerNavbars}>
       <View style={commonStyles.container}>
 
         <Image

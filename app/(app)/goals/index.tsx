@@ -10,7 +10,7 @@ export default function goals() {
   const daysInAWeek = 7;
 
   return (
-    <View style={commonStyles.container}>
+    <View style={commonStyles.containerNavbars}>
 
       <Text style={textStyles.textLg}>Entrenamiento Semanal</Text>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', padding: 10 }}>
