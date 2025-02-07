@@ -13,7 +13,7 @@ export default function recipe() {
   const recipe = getRecipeById(Number(id));
 
   return (
-    <SafeAreaProvider style={commonStyles.container}>
+    <SafeAreaProvider style={commonStyles.containerNavbars}>
       {recipe ? (
         <ScrollView>
           <Text style={textStyles.textLg}>{recipe.image_url}</Text>
