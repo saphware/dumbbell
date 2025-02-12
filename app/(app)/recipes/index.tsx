@@ -16,7 +16,7 @@ export default function recipes() {
   );
 
   return (
-    <SafeAreaProvider style={commonStyles.container}>
+    <SafeAreaProvider style={commonStyles.containerNavbars}>
 
       <View style={{ width: '100%', marginBottom: 10 }}>
         <TextInput

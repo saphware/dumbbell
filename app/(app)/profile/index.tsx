@@ -3,7 +3,7 @@ import { buttonStyles } from '@/style/buttonStyles'
 import { commonStyles } from '@/style/commonStyles'
 import { textStyles } from '@/style/textStyles'
 import React from 'react'
-import { Text, TouchableOpacity, View, Image, TextInput } from 'react-native'
+import { Text, TouchableOpacity, View, Image, TextInput, ScrollView } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useProfile } from '@/hooks/useProfile'
 import { Link } from 'expo-router'
@@ -19,50 +19,53 @@ export default function Profile() {
   };
 
   return (
-    <SafeAreaProvider style={commonStyles.container}>
-      <View style={commonStyles.container}>
+    <SafeAreaProvider style={commonStyles.containerNavbars}>
+      <ScrollView style={commonStyles.scrollContainer}>
 
-        <Image
-          source={{ uri: profile.profileImage }}
-          style={{ width: 120, height: 120, borderRadius: 60 }}
-        />
+        <View style={commonStyles.container}>
 
-        <TextInput
-          style={inputStyles.input}
-          placeholder={profile.name}
-        />
-        <TextInput
-          style={inputStyles.input}
-          placeholder={`${profile.age}`}
-          keyboardType="numeric"
-        />
-        <TextInput
-          style={inputStyles.input}
-          placeholder={`${profile.weight}`}
-          keyboardType="numeric"
-        />
-        <TextInput
-          style={inputStyles.input}
-          placeholder={`${profile.height}`}
-          keyboardType="numeric"
-        />
-        <TouchableOpacity style={buttonStyles.button} disabled>
-          <Text style={textStyles.textMd}>Guardar</Text>
-        </TouchableOpacity>
+          <Image
+            source={{ uri: profile.profileImage }}
+            style={{ width: 120, height: 120, borderRadius: 60 }}
+          />
 
-        <Link href={"/(app)/coach"} style={buttonStyles.button}>
-          <Text style={textStyles.textMd}>Perfil de entrenador</Text>
-        </Link>
+          <TextInput
+            style={inputStyles.input}
+            placeholder={profile.name}
+          />
+          <TextInput
+            style={inputStyles.input}
+            placeholder={`${profile.age}`}
+            keyboardType="numeric"
+          />
+          <TextInput
+            style={inputStyles.input}
+            placeholder={`${profile.weight}`}
+            keyboardType="numeric"
+          />
+          <TextInput
+            style={inputStyles.input}
+            placeholder={`${profile.height}`}
+            keyboardType="numeric"
+          />
+          <TouchableOpacity style={buttonStyles.button} disabled>
+            <Text style={textStyles.textMd}>Guardar</Text>
+          </TouchableOpacity>
 
-        <Link href={"/(app)/coach"} style={buttonStyles.button}>
-          <Text style={textStyles.textMd}>Reportar un bug</Text>
-        </Link>
+          <Link href={"/(app)/coach"} style={buttonStyles.button}>
+            <Text style={textStyles.textMd}>Perfil de entrenador</Text>
+          </Link>
 
-        <TouchableOpacity style={buttonStyles.button} onPress={handleSignOut}>
-          <Text style={textStyles.textMd}>Cerrar Sesión</Text>
-        </TouchableOpacity>
+          <Link href={"/(app)/coach"} style={buttonStyles.button}>
+            <Text style={textStyles.textMd}>Reportar un bug</Text>
+          </Link>
 
-      </View>
+          <TouchableOpacity style={buttonStyles.button} onPress={handleSignOut}>
+            <Text style={textStyles.textMd}>Cerrar Sesión</Text>
+          </TouchableOpacity>
+
+        </View>
+      </ScrollView>
     </SafeAreaProvider>
   )
 }

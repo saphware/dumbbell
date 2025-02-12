@@ -43,4 +43,10 @@ export const textStyles = StyleSheet.create({
         fontWeight: 'light',
         alignItems: 'flex-end',
     },
+    buttonText: {
+        color: colors.sg1,
+        fontSize: fontSize.textMd,
+        fontWeight: 'bold',
+        alignItems: 'flex-end',
+    },
 })

@@ -7,7 +7,7 @@ import { View, Text } from 'react-native';
 export default function coach() {
   const coach = useCoach();
   return (
-    <View style={commonStyles.container}>
+    <View style={commonStyles.containerNavbars}>
 
       <Image
         source={{ uri: coach.profileImage }}
