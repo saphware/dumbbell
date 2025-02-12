@@ -38,6 +38,10 @@ export const commonStyles = StyleSheet.create({
         paddingVertical: 18,
         gap: 6,
     },
+    scrollContainer: {
+        width: '100%',
+        height: '100%',
+    },
     containerNavbars: {
         flex: 1,
         width: '100%',
@@ -45,7 +49,7 @@ export const commonStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         paddingHorizontal: 18,
-        paddingVertical: 70,
+        paddingVertical: 90,
         gap: 6,
     },
     content: {
@@ -74,6 +78,8 @@ export const commonStyles = StyleSheet.create({
         backgroundColor: "#000",
         padding: 10,
         textAlign: "center",
+        zIndex: 1,
+        elevation: 1,
     },
     containerEnd: {
         display: 'flex',

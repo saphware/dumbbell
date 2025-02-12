@@ -10,3 +10,4 @@
 - **[DMB-7]** Se creo el **Perfil del coach con informacion**, estableciendo informacion general acerca del coach. *(jere)*
 - **[DMB-5]** Se creo el **Perfil con informacion personal editable**, estableciendo informacion general acerca del usuario. *(jere)*
 - **[DMB-14]** Se crearon las **Navbars**, estableciendo las rutas y sus componentes bases. *(jere)*
+- **[DMB-30]** Se colocaron los **Iconos de navegacion**. *(jere)*
