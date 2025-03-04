@@ -34,6 +34,20 @@ const mockExercises: Exercise[] = [
         description: "Ejercicio para trabajar la espalda.",
         created_at: new Date().toISOString(),
     },
+    {
+        id: 4,
+        name: "Sentadillas",
+        url_video: "https://example.com/sentadillas",
+        description: "Ejercicio para trabajar las piernas.",
+        created_at: new Date().toISOString(),
+    },
+    {
+        id: 5,
+        name: "Dominadas",
+        url_video: "https://example.com/dominadas",
+        description: "Ejercicio para trabajar la espalda.",
+        created_at: new Date().toISOString(),
+    },
 ];
 
 const mockRoutineExercises: RoutineExercise[] = [
