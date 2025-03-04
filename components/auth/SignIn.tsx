@@ -13,6 +13,7 @@ export default function SignIn({ setSignIn }: { setSignIn: (value: boolean) => v
 
     // Modal Display
     const [modal, setModal] = useState(false);
+    const [type, setType] = useState(false);
     const [modalText, setModalText] = useState('Please try again later');
     useEffect(() => {
         if (modal) {
@@ -32,12 +33,13 @@ export default function SignIn({ setSignIn }: { setSignIn: (value: boolean) => v
 
     const handleSignIn = async () => {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) {
-            setModalText(error.message);
-            setModal(true); // Show modal with error message
-        } else {
+        // if (error) {
+        //     setType(false)
+        //     setModalText(error.message);
+        //     setModal(true); // Show modal with error message
+        // } else {
             router.replace('/(app)');
-        }
+        // }
     };
 
     const handleToggleSignUp = () => {
@@ -48,7 +50,7 @@ export default function SignIn({ setSignIn }: { setSignIn: (value: boolean) => v
         <View style={commonStyles.container}>
             <View style={commonStyles.containerBetween}>
 
-                <Modal message={modalText} type={'success'} isVisible={modal} />
+                <Modal message={modalText} type={!type ? "error" : "success"} isVisible={modal} />
 
                 <View style={commonStyles.content}>
                     {/* @ts-ignore */}

@@ -1,3 +1,4 @@
+import { supabase } from '@/lib/supabase';
 import { useState } from 'react';
 
 export interface Recipe {
@@ -35,6 +36,7 @@ const mockRecipes: Recipe[] = [
 ];
 
 export function useRecipes() {
+    // const { data, error } = await supabase.from('recipe').select()
     const [recipes] = useState<Recipe[]>(mockRecipes);
 
     const getRecipeById = (id: number) => {
