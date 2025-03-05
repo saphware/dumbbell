@@ -36,15 +36,30 @@ const mockRecipes: Recipe[] = [
 ];
 
 export function useRecipes() {
-    // const { data, error } = await supabase.from('recipe').select()
     const [recipes] = useState<Recipe[]>(mockRecipes);
+    const [recipesFetch, setRecipesFetch] = useState([])
 
-    const getRecipeById = (id: number) => {
-        return recipes.find(recipe => recipe.id_recipe === id);
+    const getRecipes = async () => {
+        const { data, error } = await supabase.from('recipe').select();
+        if (error) {
+            console.error('Error fetching recipes:', error);
+            return [];
+        }
+        return data;
+    }
+
+    const getRecipeById = async (id: number) => {
+        const { data, error } = await supabase.from('recipe').select().eq('id', id).single();
+        if (error) {
+            console.error('Error fetching recipe by ID:', error);
+            return null;
+        }
+        return data;
     };
 
     return {
         recipes,
         getRecipeById,
+        getRecipes,
     };
 }

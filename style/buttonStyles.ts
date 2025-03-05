@@ -32,20 +32,37 @@ export const buttonStyles = StyleSheet.create({
 
     },
     card: {
+        position: "relative",
         color: colors.sg2,
         fontWeight: 'normal',
         borderRadius: 8,
-        borderColor: colors.sg2,
-        borderWidth: 1,
+        borderWidth: 2,
+        borderColor: '#fff',
         width: '100%',
-        height: 72,
-        paddingHorizontal: 10,
+        height: 80,
         marginVertical: 5,
         alignItems: 'center',
-        overflow: 'hidden'
+        overflow: 'hidden',
+    },
+    cardBackground: {
+        width: '100%',
+        height: '100%',
+        margin: 0,
+        borderRadius: 8,
+    },
+    overlay: {
+        width: '100%',
+        backgroundColor: "#00000080",
+        textAlign: "center",
+        position: "absolute",
+        bottom: 0,
+        zIndex: 1,
+        padding: 10,
+        borderBottomEndRadius: 8,
+        borderBottomStartRadius: 8,
     },
     flatList: {
         width: '100%',
-        height: 52,
+        height: '100%',
     }
 })
