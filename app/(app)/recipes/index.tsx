@@ -25,7 +25,7 @@ export default function recipes() {
       setLoading(false);
     };
     fetchRecipes();
-  }, []); // Add dependency to avoid infinite loop
+  }, []); 
 
   useEffect(() => {
     if (searchQuery) {
