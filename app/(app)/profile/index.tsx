@@ -2,6 +2,7 @@ import { supabase } from '@/lib/supabase'
 import { buttonStyles } from '@/style/buttonStyles'
 import { commonStyles } from '@/style/commonStyles'
 import { textStyles } from '@/style/textStyles'
+import { Role } from '@/constants/Roles';
 import React from 'react'
 import { Text, TouchableOpacity, View, Image, TextInput, ScrollView } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
@@ -25,7 +26,7 @@ export default function Profile() {
 
         <View style={commonStyles.container}>
 
-          {profile.userData.role === 1 &&
+          {profile.userData.role === Role.Client &&
             <>
               <Image
                 source={{ uri: profile.clientData?.user_image }}
@@ -59,7 +60,7 @@ export default function Profile() {
             </>
           }
           
-          {profile.userData.role === 0 &&
+          {profile.userData.role === Role.Coach &&
             <>
               <Image
                 source={{ uri: profile.coachData?.user_image }}
