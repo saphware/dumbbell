@@ -45,9 +45,13 @@ export const useCoach = (): Coach => {
 
 export const useProfile = () => {
     const userData = useUser();
-    const clientData = useClient();
+    if (userData.role === 1) {
+        const clientData = useClient();
+        return {
+            userData, clientData
+        }
+    }
+
     const coachData = useCoach();
-    return userData.role === 1 
-        ? { userData, clientData } 
-        : { userData, coachData };
+    return { userData , coachData};
 };
