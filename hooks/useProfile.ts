@@ -1,37 +1,53 @@
-interface ProfileData {
-    id_client: number;
-    id_user: number;
-    profileImage: string;
-    name: string;
-    weight: number;
-    weight_unit: string;
-    height: number;
-    height_unit: string;
-    age: number;
-    current_activity: string;
-    target_activity: string;
-    goal: string;
-    streak: number;
-    maximum_streak: number;
-    target_weight: number;
+import { Client, Coach, User } from "@/constants/types";
+
+export const useUser = (): User => {
+    return {
+        id: 1,
+        name: 'Joe',
+        id_company: 100,
+        id_auth: 2,
+        created_at: '2023-01-01T00:00:00Z',
+        updated_at: '2023-01-10T00:00:00Z',
+        role: 1,
+    };
 }
 
-export const useProfile = (): ProfileData => {
+export const useClient = (): Client => {
     return {
-        profileImage: "https://api.dicebear.com/7.x/avataaars/svg?seed=John",
-        id_client: 1,
-        id_user: 1,
-        name: "John Doe",
-        weight: 75,
-        weight_unit: "kg",
+        id: 1,
+        id_user: 101,
         height: 175,
-        height_unit: "cm",
-        age: 30,
-        current_activity: "sedentary",
-        target_activity: "moderate",
-        goal: "weight_loss",
-        streak: 3,
-        maximum_streak: 0,
-        target_weight: 70
+        weight: 70,
+        weight_unit: 'kg',
+        height_unit: 'cm',
+        streak: 5,
+        maximum_streak: 10,
+        current_activity: 3,
+        target_activity: 5,
+        goal: 'Lose weight',
+        user_image: 'https://example.com/image.jpg',
+        created_at: '2023-01-01T00:00:00Z',
+        updated_at: '2023-01-10T00:00:00Z',
+        target_weight: 65,
     };
+};
+
+export const useCoach = (): Coach => {
+    return {
+        id: 1,
+        id_user: 102,
+        user_image: 'https://example.com/image.jpg',
+        description: 'Certified fitness coach with 5 years of experience.',
+        created_at: '2023-01-01T00:00:00Z',
+        updated_at: '2023-01-10T00:00:00Z',
+    };
+};
+
+export const useProfile = () => {
+    const userData = useUser();
+    const clientData = useClient();
+    const coachData = useCoach();
+    return userData.role === 1 
+        ? { userData, clientData } 
+        : { userData, coachData };
 };

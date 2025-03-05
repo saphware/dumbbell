@@ -10,14 +10,12 @@ export default function coach() {
     <View style={commonStyles.containerNavbars}>
 
       <Image
-        source={{ uri: coach.profileImage }}
+        source={{ uri: coach.user_image }}
         style={{ width: 120, height: 120, borderRadius: 60 }}
       />
 
-      <Text style={textStyles.textLg}>{coach.name}</Text>
-      <Text style={textStyles.textLg}>{coach.experience}</Text>
-      <Text style={textStyles.textLg}>{coach.qualifications}</Text>
-      <Text style={textStyles.textLg}>{coach.philosophy}</Text>
+      <Text style={textStyles.textLg}>{coach.id_user}</Text>
+      <Text style={textStyles.textLg}>{coach.description}</Text>
 
     </View>
   );

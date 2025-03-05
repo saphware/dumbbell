@@ -11,3 +11,5 @@
 - **[DMB-5]** Se creo el **Perfil con informacion personal editable**, estableciendo informacion general acerca del usuario. *(jere)*
 - **[DMB-14]** Se crearon las **Navbars**, estableciendo las rutas y sus componentes bases. *(jere)*
 - **[DMB-30]** Se colocaron los **Iconos de navegacion**. *(jere)*
+- **[DMB-12]** En la Home List se añadieron la **Lista de rutinas**. *(jere)*
+- **[DMB-37]** Se creo la **conexion a la base de datos** y se estructuro el **estilo** de recipe junto al **estado de carga**. *(jere)*

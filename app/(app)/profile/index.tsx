@@ -10,6 +10,7 @@ import { Link } from 'expo-router'
 import { inputStyles } from '@/style/inputStyles'
 
 export default function Profile() {
+
   const profile = useProfile();
 
   const handleSignOut = async () => {
@@ -24,30 +25,59 @@ export default function Profile() {
 
         <View style={commonStyles.container}>
 
-          <Image
-            source={{ uri: profile.profileImage }}
-            style={{ width: 120, height: 120, borderRadius: 60 }}
-          />
+          {profile.userData.role === 1 &&
+            <>
+              <Image
+                source={{ uri: profile.clientData?.user_image }}
+                style={{ width: 120, height: 120, borderRadius: 60 }}
+              />
+              <TextInput
+                style={inputStyles.input}
+                placeholder={`${profile.userData?.name}`}
+                keyboardType="numeric"
+              />
+              <TextInput
+                style={inputStyles.input}
+                placeholder={`${profile.clientData?.streak}`}
+                keyboardType="numeric"
+              />
+              <TextInput
+                style={inputStyles.input}
+                placeholder={`${profile.clientData?.goal}`}
+                keyboardType="numeric"
+              />
+              <TextInput
+                style={inputStyles.input}
+                placeholder={`${profile.clientData?.weight}`}
+                keyboardType="numeric"
+              />
+              <TextInput
+                style={inputStyles.input}
+                placeholder={`${profile.clientData?.height}`}
+                keyboardType="numeric"
+              />
+            </>
+          }
+          
+          {profile.userData.role === 0 &&
+            <>
+              <Image
+                source={{ uri: profile.coachData?.user_image }}
+                style={{ width: 120, height: 120, borderRadius: 60 }}
+              />
+              <TextInput
+                style={inputStyles.input}
+                placeholder={`${profile.userData?.name}`}
+                keyboardType="numeric"
+              />
+              <TextInput
+                style={inputStyles.input}
+                placeholder={`${profile.coachData?.description}`}
+                keyboardType="numeric"
+              />
+            </>
+          }
 
-          <TextInput
-            style={inputStyles.input}
-            placeholder={profile.name}
-          />
-          <TextInput
-            style={inputStyles.input}
-            placeholder={`${profile.age}`}
-            keyboardType="numeric"
-          />
-          <TextInput
-            style={inputStyles.input}
-            placeholder={`${profile.weight}`}
-            keyboardType="numeric"
-          />
-          <TextInput
-            style={inputStyles.input}
-            placeholder={`${profile.height}`}
-            keyboardType="numeric"
-          />
           <TouchableOpacity style={buttonStyles.button} disabled>
             <Text style={textStyles.textMd}>Guardar</Text>
           </TouchableOpacity>

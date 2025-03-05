@@ -1,19 +1,12 @@
-interface CoachData {
-    profileImage: string;
-    name: string;
-    description: string;
-    qualifications: string;
-    experience: string;
-    philosophy: string;
-}
+import { Coach } from "@/constants/types";
 
-export const useCoach = (): CoachData => {
+export const useCoach = (): Coach => {
     return {
-        profileImage: "https://api.dicebear.com/7.x/avataaars/svg?seed=John",
-        name: "Kayle Damn",
+        id: 1,
+        id_user: 2,
+        user_image: "https://api.dicebear.com/7.x/avataaars/svg?seed=John",
         description: "description",
-        qualifications: "qualifications",
-        experience: "experience",
-        philosophy: "philosophy", // Using dicebear for demo avatar
+        created_at: 'string',
+        updated_at: 'string',
     };
   };

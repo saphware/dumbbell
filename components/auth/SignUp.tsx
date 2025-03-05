@@ -1,14 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { commonStyles } from '@/style/commonStyles';
 import { supabase } from '@/lib/supabase';
 import { textStyles } from '@/style/textStyles';
 import { inputStyles } from '@/style/inputStyles';
 import { buttonStyles } from '@/style/buttonStyles';
 import { useAssets } from 'expo-asset';
+import Modal from '../modal';
 
 export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => void }) {
+    const [modal, setModal] = useState(false);
+    const [type, setType] = useState(false);
+    const [modalText, setModalText] = useState('Please try again later');
+    useEffect(() => {
+        if (modal) {
+            const timer = setTimeout(() => {
+                setModal(false);
+            }, 3000); // Close the modal after 3 seconds
+
+            return () => clearTimeout(timer); // Cleanup the timer on unmount
+        }
+    }, [modal]);
+
     const [assets, error] = useAssets([
         require('@/assets/images/heroDumbbell.png'),
     ]);
@@ -18,17 +31,27 @@ export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => v
     const [loading, setLoading] = useState(false)
 
     const handleSignUp = async () => {
+        if (password !== confirmPassword) {
+            setType(false)
+            setModalText('Las contraseñas no coinciden');
+            setModal(true);
+            return;
+        }
+
         setLoading(true)
-        const {
-            data: { session },
-            error,
-        } = await supabase.auth.signUp({
+
+        const { data: { session }, error } = await supabase.auth.signUp({
             email: email,
             password: password,
         })
 
-        if (error) Alert.alert(error.message)
-        if (!session) Alert.alert('Please check your inbox for email verification!')
+        if (error) {
+            setModalText(error.message)
+            setModal(true)
+        } else if (!session) {
+            setModalText('Please check your inbox for email verification!')
+            setModal(true)
+        }
         setLoading(false)
     }
 
@@ -39,8 +62,10 @@ export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => v
     return (
         <View style={commonStyles.container}>
             <View style={commonStyles.containerBetween}>
+                <Modal message={modalText} type={!type ? "error" : "success"} isVisible={modal} />
+
                 <View style={commonStyles.content}>
-                    
+
                     {/* @ts-ignore */}
                     <Image source={assets?.[0]} />
 
