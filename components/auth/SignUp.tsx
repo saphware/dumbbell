@@ -9,6 +9,19 @@ import { buttonStyles } from '@/style/buttonStyles';
 import { useAssets } from 'expo-asset';
 import Modal from '../modal';
 
+  
+const checkEmailWhitelist = async (email: string): Promise<[any, string]> => {
+    const { data, error } = await supabase
+      .rpc('is_email_whitelisted', { email_to_check: email });
+  
+    if (error) {
+      console.error('Error al verificar el email:', error.message);
+      return [null, error.message];
+    }
+  
+    return [data[0], ""];
+  };
+
 export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => void }) {
     const [modal, setModal] = useState(false);
     const [type, setType] = useState(false);
@@ -40,13 +53,28 @@ export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => v
         }
 
         setLoading(true)
+        
+        const [userEmailResponse, errorMessage] = await checkEmailWhitelist(email);
 
-        const { data: { session }, error } = await supabase.auth.signUp({
+        if (errorMessage !== "") {
+            setModalText(errorMessage)
+            setModal(true)
+            return;
+        } 
+                
+        if (!userEmailResponse.is_allowed) {
+            setModalText("Tu email no se encuentra habilitado.")
+            setModal(true)
+            return;
+        } 
+
+        const { data, error } = await supabase.auth.signUp({
             email: email,
             password: password,
             options: {
                 data: {                
-                    role : Role.Client
+                    "id_company": userEmailResponse.company_id,
+                    "role": Role.Client,                
                 }
             }
         })
@@ -54,10 +82,11 @@ export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => v
         if (error) {
             setModalText(error.message)
             setModal(true)
-        } else if (!session) {
+        } else if (!data.session) {
             setModalText('Please check your inbox for email verification!')
             setModal(true)
         }
+                
         setLoading(false)
     }
 
