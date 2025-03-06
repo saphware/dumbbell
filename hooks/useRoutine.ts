@@ -1,4 +1,4 @@
-import { Exercise, Routine, RoutineExercise } from '@/constants/types';
+import { Exercise, Routine, RoutineExercise } from '@/types';
 
 // Simulación de datos para una rutina
 const mockRoutine: Routine = {

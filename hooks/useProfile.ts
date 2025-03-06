@@ -1,4 +1,4 @@
-import { Client, Coach, User } from "@/constants/types";
+import { Client, Coach, User } from "@/types";
 import { Role } from '@/constants/Roles';
 
 export const useUser = (): User => {
