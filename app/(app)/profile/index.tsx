@@ -107,7 +107,7 @@ export default function Profile() {
             <Text style={textStyles.buttonText}>Guardar</Text>
           </TouchableOpacity>
 
-          {profile.userData.role === 1 &&
+          {profile.userData.role === Role.Coach &&
             <Link href={"/(app)/coach"} style={commonStyles.content}>
               <IconButton icon='coach' text='Perfil de entrenador' onPress={undefined} />
             </Link>
