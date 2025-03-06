@@ -1,12 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
 import { commonStyles } from '@/style/commonStyles';
+import { Role } from '@/constants/Roles';
 import { supabase } from '@/lib/supabase';
 import { textStyles } from '@/style/textStyles';
 import { inputStyles } from '@/style/inputStyles';
 import { buttonStyles } from '@/style/buttonStyles';
 import { useAssets } from 'expo-asset';
 import Modal from '../modal';
+
+  
+const checkEmailWhitelist = async (email: string): Promise<[any, string]> => {
+    const { data, error } = await supabase
+      .rpc('is_email_whitelisted', { email_to_check: email });
+  
+    if (error) {
+      console.error('Error al verificar el email:', error.message);
+      return [null, error.message];
+    }
+  
+    return [data[0], ""];
+  };
 
 export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => void }) {
     const [modal, setModal] = useState(false);
@@ -39,19 +53,40 @@ export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => v
         }
 
         setLoading(true)
+        
+        const [userEmailResponse, errorMessage] = await checkEmailWhitelist(email);
 
-        const { data: { session }, error } = await supabase.auth.signUp({
+        if (errorMessage !== "") {
+            setModalText(errorMessage)
+            setModal(true)
+            return;
+        } 
+                
+        if (!userEmailResponse.is_allowed) {
+            setModalText("Tu email no se encuentra habilitado.")
+            setModal(true)
+            return;
+        } 
+
+        const { data, error } = await supabase.auth.signUp({
             email: email,
             password: password,
+            options: {
+                data: {                
+                    "id_company": userEmailResponse.company_id,
+                    "role": Role.Client,                
+                }
+            }
         })
 
         if (error) {
             setModalText(error.message)
             setModal(true)
-        } else if (!session) {
+        } else if (!data.session) {
             setModalText('Please check your inbox for email verification!')
             setModal(true)
         }
+                
         setLoading(false)
     }
 

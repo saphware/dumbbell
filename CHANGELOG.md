@@ -14,3 +14,4 @@
 - **[DMB-12]** En la Home List se añadieron la **Lista de rutinas**. *(jere)*
 - **[DMB-37]** Se creo la **conexion a la base de datos** y se estructuro el **estilo** de recipe junto al **estado de carga**. *(jere)*
 - **[DMB-43]** Se estilo la **informacion personal**. *(jere)*
+- **[DMB-40]** Se implementa la funcionalidad de verificar el mail en la base y la creacion del usuario con el role y el id company. *(fran)*
