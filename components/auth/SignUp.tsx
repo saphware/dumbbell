@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
 import { commonStyles } from '@/style/commonStyles';
+import { Role } from '@/constants/Roles';
 import { supabase } from '@/lib/supabase';
 import { textStyles } from '@/style/textStyles';
 import { inputStyles } from '@/style/inputStyles';
@@ -43,6 +44,11 @@ export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => v
         const { data: { session }, error } = await supabase.auth.signUp({
             email: email,
             password: password,
+            options: {
+                data: {                
+                    role : Role.Client
+                }
+            }
         })
 
         if (error) {
