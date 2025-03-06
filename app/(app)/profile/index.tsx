@@ -1,14 +1,17 @@
 import { supabase } from '@/lib/supabase'
 import { buttonStyles } from '@/style/buttonStyles'
-import { commonStyles } from '@/style/commonStyles'
+import { colors, commonStyles } from '@/style/commonStyles'
 import { textStyles } from '@/style/textStyles'
 import { Role } from '@/constants/Roles';
 import React from 'react'
-import { Text, TouchableOpacity, View, Image, TextInput, ScrollView } from 'react-native'
+import { Text, TouchableOpacity, View, TextInput, ScrollView } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useProfile } from '@/hooks/useProfile'
 import { Link } from 'expo-router'
 import { inputStyles } from '@/style/inputStyles'
+import { Image } from 'expo-image'
+import Entypo from '@expo/vector-icons/Entypo';
+import IconButton from '@/components/buttons/IconButton'
 
 export default function Profile() {
 
@@ -22,41 +25,62 @@ export default function Profile() {
 
   return (
     <SafeAreaProvider style={commonStyles.containerNavbars}>
-      <ScrollView style={commonStyles.scrollContainer}>
+      <ScrollView style={commonStyles.scrollContainer} showsVerticalScrollIndicator={false}>
 
-        <View style={commonStyles.container}>
+        <View key={1} style={commonStyles.content}>
 
           {profile.userData.role === Role.Client &&
             <>
               <Image
                 source={{ uri: profile.clientData?.user_image }}
-                style={{ width: 120, height: 120, borderRadius: 60 }}
+                style={{ width: 120, height: 120, borderRadius: 60, backgroundColor: colors.sg2, marginVertical: 6 }}
               />
-              <TextInput
-                style={inputStyles.input}
-                placeholder={`${profile.userData?.name}`}
-                keyboardType="numeric"
-              />
-              <TextInput
-                style={inputStyles.input}
-                placeholder={`${profile.clientData?.streak}`}
-                keyboardType="numeric"
-              />
-              <TextInput
-                style={inputStyles.input}
-                placeholder={`${profile.clientData?.goal}`}
-                keyboardType="numeric"
-              />
-              <TextInput
-                style={inputStyles.input}
-                placeholder={`${profile.clientData?.weight}`}
-                keyboardType="numeric"
-              />
-              <TextInput
-                style={inputStyles.input}
-                placeholder={`${profile.clientData?.height}`}
-                keyboardType="numeric"
-              />
+
+              <View style={inputStyles.input}>
+                <TextInput
+                  style={inputStyles.inputText}
+                  placeholderTextColor={colors.sg2}
+                  placeholder={`${profile.userData?.name}`}
+                  keyboardType="numeric"
+                />
+              </View>
+
+              <View style={inputStyles.input}>
+                <TextInput
+                  style={inputStyles.inputText}
+                  placeholderTextColor={colors.sg2}
+                  placeholder={`${profile.clientData?.streak}`}
+                  keyboardType="numeric"
+                />
+              </View>
+
+              <View style={inputStyles.input}>
+                <TextInput
+                  style={inputStyles.inputText}
+                  placeholderTextColor={colors.sg2}
+                  placeholder={`${profile.clientData?.goal}`}
+                  keyboardType="numeric"
+                />
+              </View>
+
+              <View style={inputStyles.input}>
+                <TextInput
+                  style={inputStyles.inputText}
+                  placeholderTextColor={colors.sg2}
+                  placeholder={`${profile.clientData?.weight}`}
+                  keyboardType="numeric"
+                />
+              </View>
+
+              <View style={inputStyles.input}>
+                <TextInput
+                  style={inputStyles.inputText}
+                  placeholderTextColor={colors.sg2}
+                  placeholder={`${profile.clientData?.height}`}
+                  keyboardType="numeric"
+                />
+              </View>
+
             </>
           }
           
@@ -80,19 +104,23 @@ export default function Profile() {
           }
 
           <TouchableOpacity style={buttonStyles.button} disabled>
-            <Text style={textStyles.textMd}>Guardar</Text>
+            <Text style={textStyles.buttonText}>Guardar</Text>
           </TouchableOpacity>
 
-          <Link href={"/(app)/coach"} style={buttonStyles.button}>
-            <Text style={textStyles.textMd}>Perfil de entrenador</Text>
+          {profile.userData.role === 1 &&
+            <Link href={"/(app)/coach"} style={commonStyles.content}>
+              <IconButton icon='coach' text='Perfil de entrenador' onPress={undefined} />
+            </Link>
+          }
+
+          <Link href={"/(app)/coach"} style={commonStyles.content}>
+            <IconButton icon='bug' text='Reportar un bug' onPress={undefined} />
           </Link>
 
-          <Link href={"/(app)/coach"} style={buttonStyles.button}>
-            <Text style={textStyles.textMd}>Reportar un bug</Text>
-          </Link>
+
 
           <TouchableOpacity style={buttonStyles.button} onPress={handleSignOut}>
-            <Text style={textStyles.textMd}>Cerrar Sesión</Text>
+            <Text style={textStyles.buttonText}>Cerrar Sesión</Text>
           </TouchableOpacity>
 
         </View>
