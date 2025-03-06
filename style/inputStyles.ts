@@ -8,7 +8,7 @@ export const inputStyles = StyleSheet.create({
         borderRadius: 8,
         borderWidth: 1,
         width: '100%',
-        height: 52,
+        minHeight: 52,
         fontWeight: 'normal',
         paddingHorizontal: 10,
         flexDirection: 'row',
@@ -17,7 +17,7 @@ export const inputStyles = StyleSheet.create({
     },
     inputText: {
         width: '90%',
-        height: 52,
+        minHeight: 52,
         fontWeight: 'normal',
         color: colors.sg2,
     }
