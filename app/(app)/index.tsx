@@ -1,19 +1,29 @@
-import Button from '@/components/buttons/Button'
 import { useProfile } from '@/hooks/useProfile'
 import { buttonStyles } from '@/style/buttonStyles'
 import { commonStyles } from '@/style/commonStyles'
 import { textStyles } from '@/style/textStyles'
 import { Link } from 'expo-router'
 import React from 'react'
-import { FlatList, TouchableOpacity, View, Text } from 'react-native'
-import { mockRoutine } from '@/hooks/useRoutine' // Importar los datos simulados
+import { FlatList, View, Text } from 'react-native'
+import { useRoutine } from '@/hooks/useRoutine' // Importar los datos simulados
+import { Image } from 'expo-image'
 
 export default function Home() {
   const profile = useProfile();
+  const routine = useRoutine()
+
   // Función para renderizar cada rutina
-  const renderRoutine = ({ item }: { item: { id: number; name: string } }) => (
-    <Link href="/roadmap" style={buttonStyles.button}>
-      <Text style={textStyles.buttonText}>{item.name}</Text>
+  const renderRoutine = ({ item }: { item: { id: number; title: string; image: string } }) => (
+    <Link href={`/roadmap/${item.id}`} key={item.id} style={buttonStyles.card}>
+      <View key={item.id} style={buttonStyles.overlay}>
+        <Text style={textStyles.textSm}>{item.title}</Text>
+      </View>
+      <Image
+        style={buttonStyles.cardBackground}
+        source={{
+          uri: item.image,
+        }}
+      />
     </Link>
   );
 
@@ -23,7 +33,7 @@ export default function Home() {
         <>
           <FlatList
             style={buttonStyles.flatList}
-            data={[mockRoutine]} // Aquí puedes usar un array de rutinas
+            data={routine as unknown as { id: number; title: string; image: string }[]} // Asegúrate de que routine sea un array de rutinas
             renderItem={renderRoutine}
             keyExtractor={item => item.id.toString()}
           />
