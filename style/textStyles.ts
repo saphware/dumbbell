@@ -24,7 +24,7 @@ export const textStyles = StyleSheet.create({
     },
     textMd: {
         fontSize: fontSize.textMd,
-        color: colors.sg5,
+        color: colors.sg2,
         fontWeight: 'light',
     },
     textSm: {
@@ -53,6 +53,7 @@ export const textStyles = StyleSheet.create({
         fontSize: fontSize.textSm,
         color: colors.sg2,
         fontWeight: 'light',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginBottom: 12,
     }
 })

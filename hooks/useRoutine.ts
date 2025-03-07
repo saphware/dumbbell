@@ -178,6 +178,61 @@ export const routines: Routine[] = [
                 reps: 8,
                 sets: 4,
                 comment: "Controla bien la bajada."
+            },
+            {
+                id: "1-7",
+                order: 2,
+                image: "https://images.pexels.com/photos/1229356/pexels-photo-1229356.jpeg?cs=srgb&dl=pexels-anush-1229356.jpg&fm=jpg",
+                name: "Press de Banca",
+                description: "Usa una barra con peso moderado y baja hasta el pecho.",
+                weight: 50,
+                reps: 8,
+                sets: 4,
+                comment: "Controla bien la bajada."
+            },
+            {
+                id: "1-8",
+                order: 3,
+                image: "https://images.pexels.com/photos/1229356/pexels-photo-1229356.jpeg?cs=srgb&dl=pexels-anush-1229356.jpg&fm=jpg",
+                name: "Press de Banca",
+                description: "Usa una barra con peso moderado y baja hasta el pecho.",
+                weight: 50,
+                reps: 8,
+                sets: 4,
+                comment: "Controla bien la bajada."
+            },
+            {
+                id: "1-9",
+                order: 4,
+                image: "https://images.pexels.com/photos/1229356/pexels-photo-1229356.jpeg?cs=srgb&dl=pexels-anush-1229356.jpg&fm=jpg",
+                name: "Press de Banca",
+                description: "Usa una barra con peso moderado y baja hasta el pecho.",
+                weight: 50,
+                reps: 8,
+                sets: 4,
+                comment: "Controla bien la bajada."
+            },
+            {
+                id: "1-10",
+                order: 5,
+                image: "https://images.pexels.com/photos/1229356/pexels-photo-1229356.jpeg?cs=srgb&dl=pexels-anush-1229356.jpg&fm=jpg",
+                name: "Press de Banca",
+                description: "Usa una barra con peso moderado y baja hasta el pecho.",
+                weight: 50,
+                reps: 8,
+                sets: 4,
+                comment: "Controla bien la bajada."
+            },
+            {
+                id: "1-11",
+                order: 6,
+                image: "https://images.pexels.com/photos/1229356/pexels-photo-1229356.jpeg?cs=srgb&dl=pexels-anush-1229356.jpg&fm=jpg",
+                name: "Press de Banca",
+                description: "Usa una barra con peso moderado y baja hasta el pecho.",
+                weight: 50,
+                reps: 8,
+                sets: 4,
+                comment: "Controla bien la bajada."
             }
         ]
     },

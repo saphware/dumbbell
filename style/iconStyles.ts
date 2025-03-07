@@ -5,4 +5,15 @@ export const iconStyles = StyleSheet.create({
         width: 36,
         height: 36,
     },
+    iconBackButton: {
+        position: 'absolute',
+        left: 0,
+        width: 24,
+        height: 24,
+    },
+    starIcon: {
+        height:72,
+        justifyContent: "center",
+        alignItems: "center"
+    }
 });

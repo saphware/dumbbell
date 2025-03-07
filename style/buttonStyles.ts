@@ -90,5 +90,35 @@ export const buttonStyles = StyleSheet.create({
     flatList: {
         width: '100%',
         height: '100%',
+    },
+    buttonBorder: {
+        borderRadius: 5,
+        color: colors.sg2,
+        borderColor: colors.sg2,
+        display: "flex",
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        width: '100%',
+        height: 52,
+    },
+    buttonContent: {
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: "center",
+    },
+    onStep: {
+        backgroundColor: colors.sg2,
+        borderRadius: 50,
+        color: colors.sg3,
+        width: 72,
+        height: 72,
+        textAlign: "center",
+        alignItems: "center",
+    },
+    offStep: {
+
     }
 })
