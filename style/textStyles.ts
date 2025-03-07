@@ -10,7 +10,7 @@ export const textStyles = StyleSheet.create({
     titleMd: {
         fontSize: fontSize.titleMd,
         color: colors.sg2,
-        fontWeight: 'semibold',
+        fontWeight: '600',
     },
     titleSm: {
         fontSize: fontSize.titleSm,

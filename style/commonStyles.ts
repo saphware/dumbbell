@@ -69,18 +69,6 @@ export const commonStyles = StyleSheet.create({
         flexDirection: 'column',
         gap: 6,
     },
-    overlay: {
-        position: "absolute",
-        width: '100%',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: "#000",
-        padding: 10,
-        textAlign: "center",
-        zIndex: 1,
-        elevation: 1,
-    },
     containerEnd: {
         display: 'flex',
         width: '100%',
@@ -92,5 +80,11 @@ export const commonStyles = StyleSheet.create({
         width: '100%',
         height: 'auto',
         alignItems: 'flex-start',
+    },
+    recipeImage: {
+        width: '100%',
+        height: 240,
+        borderRadius: 8,
+        marginVertical: 12,
     },
 });
