@@ -7,9 +7,10 @@ import React from 'react'
 import { FlatList, View, Text } from 'react-native'
 import { useRoutine } from '@/hooks/useRoutine' // Importar los datos simulados
 import { Image } from 'expo-image'
+import QuoteComponent from '@/components/Quotes'
 
 export default function Home() {
-  
+
   const profile = useProfile();
   const routine = useRoutine()
 
@@ -30,6 +31,7 @@ export default function Home() {
 
   return (
     <View style={commonStyles.containerNavbars}>
+      <QuoteComponent />
       {profile.userData.role === 1 &&
         <>
           <FlatList
@@ -38,15 +40,13 @@ export default function Home() {
             renderItem={renderRoutine}
             keyExtractor={item => item.id.toString()}
           />
-          <Text>El role es 1</Text>
         </>
       }
       {profile.userData.role === 0 &&
         <>
-          <Text>El role es 0</Text>
+          <Text>Coach View</Text>
         </>
       }
-      <Text>Texto general para ambos roles</Text>
     </View>
   )
 }

@@ -49,4 +49,10 @@ export const textStyles = StyleSheet.create({
         fontWeight: 'bold',
         alignItems: 'flex-end',
     },
+    quotes: {
+        fontSize: fontSize.textSm,
+        color: colors.sg2,
+        fontWeight: 'light',
+        textAlign: 'center'
+    }
 })
