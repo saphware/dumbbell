@@ -14,3 +14,4 @@
 - **[DMB-12]** En la Home List se añadieron la **Lista de rutinas**. *(jere)*
 - **[DMB-37]** Se creo la **conexion a la base de datos** y se estructuro el **estilo** de recipe junto al **estado de carga**. *(jere)*
 - **[DMB-43]** Se estilo la **informacion personal**. *(jere)*
+- **[DMB-8]** Se generaron los **Quotes**. *(Jere)*
