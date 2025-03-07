@@ -9,6 +9,7 @@ import { useRoutine } from '@/hooks/useRoutine' // Importar los datos simulados
 import { Image } from 'expo-image'
 
 export default function Home() {
+  
   const profile = useProfile();
   const routine = useRoutine()
 
