@@ -15,3 +15,4 @@
 - **[DMB-37]** Se creo la **conexion a la base de datos** y se estructuro el **estilo** de recipe junto al **estado de carga**. *(jere)*
 - **[DMB-43]** Se estilo la **informacion personal**. *(jere)*
 - **[DMB-8]** Se generaron los **Quotes**. *(Jere)*
+- **[DMB-12]** Se genero el **listado del /Home** tanto para coach como para estudiantes. *(jere)*
