@@ -87,4 +87,9 @@ export const commonStyles = StyleSheet.create({
         borderRadius: 8,
         marginVertical: 12,
     },
+    cardContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%',
+    },
 });

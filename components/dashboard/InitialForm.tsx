@@ -1,6 +1,9 @@
+import { buttonStyles } from '@/style/buttonStyles';
+import { commonStyles } from '@/style/commonStyles';
+import { inputStyles } from '@/style/inputStyles';
+import { textStyles } from '@/style/textStyles';
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { commonStyles } from '../../styles/commonStyles';
+import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 
 type FormData = {
     name: string;
@@ -55,9 +58,9 @@ const InitialForm: React.FC = () => {
             case 1:
                 return (
                     <View>
-                        <Text style={commonStyles.span}>Name:</Text>
+                        <Text style={textStyles.span}>Name:</Text>
                         <TextInput
-                            style={commonStyles.input}
+                            style={inputStyles.input}
                             value={formData.name}
                             onChangeText={(text) => updateFormData('name', text)}
                             placeholder="Enter your name"
@@ -67,9 +70,9 @@ const InitialForm: React.FC = () => {
             case 2:
                 return (
                     <View>
-                        <Text style={commonStyles.span}>Weight (kg):</Text>
+                        <Text style={textStyles.span}>Weight (kg):</Text>
                         <TextInput
-                            style={commonStyles.input}
+                            style={inputStyles.input}
                             value={formData.weight}
                             onChangeText={(text) => updateFormData('weight', text)}
                             placeholder="Enter your weight"
@@ -80,9 +83,9 @@ const InitialForm: React.FC = () => {
             case 3:
                 return (
                     <View>
-                        <Text style={commonStyles.span}>Height (cm):</Text>
+                        <Text style={textStyles.span}>Height (cm):</Text>
                         <TextInput
-                            style={commonStyles.input}
+                            style={inputStyles.input}
                             value={formData.height}
                             onChangeText={(text) => updateFormData('height', text)}
                             placeholder="Enter your height"
@@ -93,9 +96,9 @@ const InitialForm: React.FC = () => {
             case 4:
                 return (
                     <View>
-                        <Text style={commonStyles.span}>Extra Information:</Text>
+                        <Text style={textStyles.span}>Extra Information:</Text>
                         <TextInput
-                            style={[commonStyles.input, commonStyles.input]}
+                            style={inputStyles.input}
                             value={formData.extraInfo}
                             onChangeText={(text) => updateFormData('extraInfo', text)}
                             placeholder="Any additional information you'd like to share"
@@ -111,25 +114,25 @@ const InitialForm: React.FC = () => {
 
     return (
         <ScrollView contentContainerStyle={commonStyles.container}>
-            <Text style={commonStyles.text}>Step {step} of 4</Text>
+            <Text style={textStyles.span}>Step {step} of 4</Text>
             {renderStep()}
-            <View style={commonStyles.input}>
+            <View style={inputStyles.input}>
                 {step > 1 && (
-                    <TouchableOpacity style={commonStyles.button} onPress={handleBack}>
-                        <Text style={commonStyles.buttonText}>Back</Text>
+                    <TouchableOpacity style={buttonStyles.button} onPress={handleBack}>
+                        <Text style={textStyles.buttonText}>Back</Text>
                     </TouchableOpacity>
                 )}
                 {step < 4 ? (
                     <TouchableOpacity
-                        style={[commonStyles.button, !isStepValid() && commonStyles.button]}
+                        style={[buttonStyles.button, !isStepValid() && buttonStyles.button]}
                         onPress={handleNext}
                         disabled={!isStepValid()}
                     >
-                        <Text style={commonStyles.buttonText}>Next</Text>
+                        <Text style={textStyles.buttonText}>Next</Text>
                     </TouchableOpacity>
                 ) : (
-                    <TouchableOpacity style={commonStyles.button} onPress={handleSubmit}>
-                        <Text style={commonStyles.buttonText}>Submit</Text>
+                    <TouchableOpacity style={buttonStyles.button} onPress={handleSubmit}>
+                        <Text style={textStyles.buttonText}>Submit</Text>
                     </TouchableOpacity>
                 )}
             </View>

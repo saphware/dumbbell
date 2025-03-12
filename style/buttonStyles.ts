@@ -57,7 +57,6 @@ export const buttonStyles = StyleSheet.create({
         textAlign: "center",
         position: 'absolute',
         bottom: 0,
-
     },
     card: {
         position: "relative",
@@ -70,11 +69,25 @@ export const buttonStyles = StyleSheet.create({
         alignItems: 'center',
         overflow: 'hidden',
     },
+    studentCard: {
+        borderRadius: 10,
+        padding: 4,
+        marginVertical: 6,
+        borderWidth: 1,
+        borderColor: colors.sg2,
+    },
     cardBackground: {
         width: '100%',
         height: '100%',
         margin: 0,
         borderRadius: 8,
+    },
+    cardImage: {
+        backgroundColor: colors.sg2,
+        borderRadius: 8,
+        width: 64,
+        height: 64,
+        marginRight: 12,
     },
     overlay: {
         width: '100%',
@@ -90,5 +103,35 @@ export const buttonStyles = StyleSheet.create({
     flatList: {
         width: '100%',
         height: '100%',
+    },
+    buttonBorder: {
+        borderRadius: 5,
+        color: colors.sg2,
+        borderColor: colors.sg2,
+        display: "flex",
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        width: '100%',
+        height: 52,
+    },
+    buttonContent: {
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: "center",
+    },
+    onStep: {
+        backgroundColor: colors.sg2,
+        borderRadius: 50,
+        color: colors.sg3,
+        width: 72,
+        height: 72,
+        textAlign: "center",
+        alignItems: "center",
+    },
+    offStep: {
+
     }
 })
