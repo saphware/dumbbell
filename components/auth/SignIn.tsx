@@ -33,13 +33,13 @@ export default function SignIn({ setSignIn }: { setSignIn: (value: boolean) => v
 
     const handleSignIn = async () => {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
-        // if (error) {
-        //     setType(false)
-        //     setModalText(error.message);
-        //     setModal(true); // Show modal with error message
-        // } else {
+        if (error) {
+            setType(false)
+            setModalText(error.message);
+            setModal(true); // Show modal with error message
+        } else {
             router.replace('/(app)');
-        // }
+        }
     };
 
     const handleToggleSignUp = () => {

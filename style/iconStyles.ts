@@ -15,5 +15,11 @@ export const iconStyles = StyleSheet.create({
         height:72,
         justifyContent: "center",
         alignItems: "center"
+    },
+    nextIcon: {
+        position: 'absolute',
+        right: 0,
+        width: 24,
+        height: 24,
     }
 });

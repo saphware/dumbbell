@@ -4,11 +4,10 @@ import { inputStyles } from '@/style/inputStyles'
 import { textStyles } from '@/style/textStyles'
 import { Link } from 'expo-router'
 import React, { useEffect, useState } from 'react'
-import { FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { FlatList, Image, Text, TextInput, View } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useRecipes } from '@/hooks/useRecipes'
 import AntDesign from '@expo/vector-icons/AntDesign';
-import SkeletonLoading from 'expo-skeleton-loading'
 
 export default function recipes() {
   const { getRecipes } = useRecipes();

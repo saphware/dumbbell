@@ -57,7 +57,6 @@ export const buttonStyles = StyleSheet.create({
         textAlign: "center",
         position: 'absolute',
         bottom: 0,
-
     },
     card: {
         position: "relative",
@@ -70,11 +69,25 @@ export const buttonStyles = StyleSheet.create({
         alignItems: 'center',
         overflow: 'hidden',
     },
+    studentCard: {
+        borderRadius: 10,
+        padding: 4,
+        marginVertical: 6,
+        borderWidth: 1,
+        borderColor: colors.sg2,
+    },
     cardBackground: {
         width: '100%',
         height: '100%',
         margin: 0,
         borderRadius: 8,
+    },
+    cardImage: {
+        backgroundColor: colors.sg2,
+        borderRadius: 8,
+        width: 64,
+        height: 64,
+        marginRight: 12,
     },
     overlay: {
         width: '100%',

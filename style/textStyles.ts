@@ -54,6 +54,6 @@ export const textStyles = StyleSheet.create({
         color: colors.sg2,
         fontWeight: 'light',
         textAlign: 'center',
-        marginBottom: 12,
+        // marginBottom: 12,
     }
 })
