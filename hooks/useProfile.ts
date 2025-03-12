@@ -1,4 +1,5 @@
-import { Client, Coach, User } from "@/constants/types";
+import { Client, Coach, User } from "@/types";
+import { Role } from '@/constants/Roles';
 
 export const useUser = (): User => {
     return {
@@ -45,9 +46,13 @@ export const useCoach = (): Coach => {
 
 export const useProfile = () => {
     const userData = useUser();
-    const clientData = useClient();
+    if (userData.role === Role.Client) {
+        const clientData = useClient();
+        return {
+            userData, clientData
+        }
+    }
+
     const coachData = useCoach();
-    return userData.role === 1 
-        ? { userData, clientData } 
-        : { userData, coachData };
+    return { userData , coachData};
 };

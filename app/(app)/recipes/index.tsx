@@ -12,7 +12,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 export default function recipes() {
   const { getRecipes } = useRecipes();
   const [recipes, setRecipes] = useState([]);
-  const [searchQuery, setSearchQuery] = React.useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [fetchedRecipes, setFetchedRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -21,10 +21,10 @@ export default function recipes() {
       const data: any[] = await getRecipes(); // Specify the type of data
       setFetchedRecipes(data as never[]); // Store fetched recipes
       setRecipes(data as never[]); // Initialize recipes with fetched data
-      setLoading(false); // Set loading to false after fetching
+      setLoading(false);
     };
     fetchRecipes();
-  }, [getRecipes]); // Add dependency to avoid infinite loop
+  }, []); 
 
   useEffect(() => {
     if (searchQuery) {

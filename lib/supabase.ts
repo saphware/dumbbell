@@ -1,6 +1,3 @@
-// const supabaseUrl = "https://fekbuqrjisrhvlkxplfj.supabase.co"
-// const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZla2J1cXJqaXNyaHZsa3hwbGZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY5NjMxNTUsImV4cCI6MjA1MjUzOTE1NX0.bQK-HfkQDDQreWJN5EbIYTJo6J4hDDQrk4TWKGvFIZc"
-
 import { AppState, Platform } from 'react-native'
 import 'react-native-url-polyfill/auto'
 import AsyncStorage from '@react-native-async-storage/async-storage'

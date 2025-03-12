@@ -3,6 +3,7 @@ import { buttonStyles } from '@/style/buttonStyles'
 import { colors, commonStyles } from '@/style/commonStyles'
 import { textStyles } from '@/style/textStyles'
 import { Link } from 'expo-router'
+import { Role } from '@/constants/Roles';
 import React from 'react'
 import { FlatList, View, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-native'
 import { useRoutine } from '@/hooks/useRoutine' // Importar los datos simulados
@@ -55,8 +56,7 @@ export default function Home() {
 
   return (
     <View style={commonStyles.containerNavbars}>
-
-      {profile.userData.role === 1 ?
+      {profile.userData.role === Role.Client ?
         <>
           <QuoteComponent />
           <FlatList

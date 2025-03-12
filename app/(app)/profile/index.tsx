@@ -2,6 +2,7 @@ import { supabase } from '@/lib/supabase'
 import { buttonStyles } from '@/style/buttonStyles'
 import { colors, commonStyles } from '@/style/commonStyles'
 import { textStyles } from '@/style/textStyles'
+import { Role } from '@/constants/Roles';
 import React from 'react'
 import { Text, TouchableOpacity, View, TextInput, ScrollView } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
@@ -28,7 +29,7 @@ export default function Profile() {
 
         <View key={1} style={commonStyles.content}>
 
-          {profile.userData.role === 1 &&
+          {profile.userData.role === Role.Client &&
             <>
               <Image
                 source={{ uri: profile.clientData?.user_image }}
@@ -82,8 +83,8 @@ export default function Profile() {
 
             </>
           }
-
-          {profile.userData.role === 0 &&
+          
+          {profile.userData.role === Role.Coach &&
             <>
               <Image
                 source={{ uri: profile.coachData?.user_image }}
@@ -106,7 +107,7 @@ export default function Profile() {
             <Text style={textStyles.buttonText}>Guardar</Text>
           </TouchableOpacity>
 
-          {profile.userData.role === 1 &&
+          {profile.userData.role === Role.Coach &&
             <Link href={"/(app)/coach"} style={commonStyles.content}>
               <IconButton icon='coach' text='Perfil de entrenador' onPress={undefined} />
             </Link>

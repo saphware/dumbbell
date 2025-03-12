@@ -1,4 +1,4 @@
-import { Coach } from "@/constants/types";
+import { Coach } from "@/types";
 
 export const useCoach = (): Coach => {
     return {

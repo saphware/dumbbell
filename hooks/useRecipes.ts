@@ -1,12 +1,6 @@
 import { supabase } from '@/lib/supabase';
 import { useState } from 'react';
-
-export interface Recipe {
-    id_recipe: number;
-    title: string;
-    content: string;
-    image_url: string;
-}
+import { Recipe } from '@/types';
 
 const mockRecipes: Recipe[] = [
     {
