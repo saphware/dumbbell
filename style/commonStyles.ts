@@ -80,6 +80,7 @@ export const commonStyles = StyleSheet.create({
         width: '100%',
         height: 'auto',
         alignItems: 'flex-start',
+        gap: 8,
     },
     recipeImage: {
         width: '100%',
