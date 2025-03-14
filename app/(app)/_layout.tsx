@@ -5,9 +5,13 @@ import TopNavbar from '@/components/nav/TopNavbar';
 import BottomNavbar from '@/components/nav/BottomNavbar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { commonStyles } from '@/style/commonStyles';
+import InitialForm from '@/components/dashboard/InitialForm';
+import { useProfile } from '@/hooks/useProfile';
+import { Role } from '@/constants/Roles';
 
 export default function AppLayout() {
   const { session, isLoading } = useSession();
+  const profile = useProfile();
 
   if (isLoading) {
     return <Text>Loading...</Text>;
@@ -15,6 +19,10 @@ export default function AppLayout() {
 
   if (!session) {
     return <Redirect href="/auth" />;
+  }
+
+  if (profile.userData.newUser === 0) {
+    return <InitialForm />;
   }
 
   return (

@@ -17,3 +17,5 @@
 - **[DMB-8]** Se generaron los **Quotes**. *(Jere)*
 - **[DMB-12]** Se genero el **listado del /Home** tanto para coach como para estudiantes. *(jere)*
 - **[DMB-40]** Se implementa la funcionalidad de verificar el mail en la base y la creacion del usuario con el role y el id company. *(fran)*
+- **[DMB-2]** Se creo el *formulario inicial* para nuevos usuarios. *(jere)*
+- **[DMB-4]** Se establecieron las preguntas iniciales y el paso a paso, ademas se modifico el usuario añadiendo la propiedad "newUser". *(jere)*

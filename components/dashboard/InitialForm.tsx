@@ -1,8 +1,12 @@
+import { useProfile } from '@/hooks/useProfile';
 import { buttonStyles } from '@/style/buttonStyles';
-import { commonStyles } from '@/style/commonStyles';
+import { colors, commonStyles } from '@/style/commonStyles';
 import { inputStyles } from '@/style/inputStyles';
 import { textStyles } from '@/style/textStyles';
+import { useAssets } from 'expo-asset';
+import { Link } from 'expo-router';
 import React, { useState } from 'react';
+import { Image } from 'react-native';
 import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 
 type FormData = {
@@ -13,6 +17,10 @@ type FormData = {
 };
 
 const InitialForm: React.FC = () => {
+    const [assets] = useAssets([
+        require('@/assets/images/heroDumbbell.png'),
+    ]);
+    const profile = useProfile();
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState<FormData>({
         name: '',
@@ -57,55 +65,76 @@ const InitialForm: React.FC = () => {
         switch (step) {
             case 1:
                 return (
-                    <View>
-                        <Text style={textStyles.span}>Name:</Text>
-                        <TextInput
-                            style={inputStyles.input}
-                            value={formData.name}
-                            onChangeText={(text) => updateFormData('name', text)}
-                            placeholder="Enter your name"
-                        />
-                    </View>
+                    <>
+                        <View style={inputStyles.input}>
+                            <TextInput
+                                style={inputStyles.inputText}
+                                placeholderTextColor={colors.sg2}
+                                value={formData.name}
+                                onChangeText={(text) => updateFormData('name', text)}
+                                placeholder="Ingresa tu nombre"
+                            />
+                        </View>
+                        <View style={inputStyles.input}>
+                            <TextInput
+                                style={inputStyles.inputText}
+                                placeholderTextColor={colors.sg2}
+                                onChangeText={(text) => updateFormData('weight', text)}
+                                placeholder="Ingresa tu peso"
+                                keyboardType="numeric"
+                            />
+                        </View>
+                    </>
                 );
             case 2:
                 return (
-                    <View>
-                        <Text style={textStyles.span}>Weight (kg):</Text>
-                        <TextInput
-                            style={inputStyles.input}
-                            value={formData.weight}
-                            onChangeText={(text) => updateFormData('weight', text)}
-                            placeholder="Enter your weight"
-                            keyboardType="numeric"
-                        />
-                    </View>
+                    <>
+                        <View style={inputStyles.input}>
+                            <TextInput
+                                style={inputStyles.inputText}
+                                placeholderTextColor={colors.sg2}
+                                onChangeText={(text) => updateFormData('weight', text)}
+                                placeholder="Ingresa tu peso"
+                                keyboardType="numeric"
+                            />
+                        </View>
+                        <View style={inputStyles.input}>
+                            <TextInput
+                                style={inputStyles.inputText}
+                                placeholderTextColor={colors.sg2}
+                                value={formData.height}
+                                onChangeText={(text) => updateFormData('height', text)}
+                                placeholder="Ingresa tu altura"
+                                keyboardType="numeric"
+                            />
+                        </View>
+                    </>
                 );
             case 3:
                 return (
-                    <View>
-                        <Text style={textStyles.span}>Height (cm):</Text>
-                        <TextInput
-                            style={inputStyles.input}
-                            value={formData.height}
-                            onChangeText={(text) => updateFormData('height', text)}
-                            placeholder="Enter your height"
-                            keyboardType="numeric"
-                        />
-                    </View>
-                );
-            case 4:
-                return (
-                    <View>
-                        <Text style={textStyles.span}>Extra Information:</Text>
-                        <TextInput
-                            style={inputStyles.input}
-                            value={formData.extraInfo}
-                            onChangeText={(text) => updateFormData('extraInfo', text)}
-                            placeholder="Any additional information you'd like to share"
-                            multiline
-                            numberOfLines={4}
-                        />
-                    </View>
+                    <>
+                        <View style={inputStyles.input}>
+                            <TextInput
+                                style={inputStyles.inputText}
+                                placeholderTextColor={colors.sg2}
+                                value={formData.height}
+                                onChangeText={(text) => updateFormData('height', text)}
+                                placeholder="Ingresa tu altura"
+                                keyboardType="numeric"
+                            />
+                        </View>
+                        <View style={inputStyles.input}>
+                            <TextInput
+                                style={inputStyles.inputText}
+                                placeholderTextColor={colors.sg2}
+                                value={formData.extraInfo}
+                                onChangeText={(text) => updateFormData('extraInfo', text)}
+                                placeholder="Añadi cualquier informacion extra que desees."
+                                multiline
+                                numberOfLines={4}
+                            />
+                        </View>
+                    </>
                 );
             default:
                 return null;
@@ -113,30 +142,39 @@ const InitialForm: React.FC = () => {
     };
 
     return (
-        <ScrollView contentContainerStyle={commonStyles.container}>
-            <Text style={textStyles.span}>Step {step} of 4</Text>
-            {renderStep()}
-            <View style={inputStyles.input}>
-                {step > 1 && (
-                    <TouchableOpacity style={buttonStyles.button} onPress={handleBack}>
-                        <Text style={textStyles.buttonText}>Back</Text>
-                    </TouchableOpacity>
-                )}
-                {step < 4 ? (
-                    <TouchableOpacity
-                        style={[buttonStyles.button, !isStepValid() && buttonStyles.button]}
-                        onPress={handleNext}
-                        disabled={!isStepValid()}
-                    >
-                        <Text style={textStyles.buttonText}>Next</Text>
-                    </TouchableOpacity>
-                ) : (
-                    <TouchableOpacity style={buttonStyles.button} onPress={handleSubmit}>
-                        <Text style={textStyles.buttonText}>Submit</Text>
-                    </TouchableOpacity>
-                )}
+        <View style={commonStyles.mainContainer}>
+            <View style={commonStyles.container}>
+                <View style={commonStyles.containerBetween}>
+                    {/* @ts-ignore */}
+                    <Image source={assets?.[0]} />
+                    {/* <Text style={textStyles.titleSm}>Step {step} of 4</Text> */}
+                    <Text style={textStyles.titleLg}>¡Dejame conocerte!</Text>
+                    {renderStep()}
+                    <View style={commonStyles.content}>
+                        {step < 3 ? (
+                            <TouchableOpacity
+                                style={[buttonStyles.button, !isStepValid() && buttonStyles.button]}
+                                onPress={handleNext}
+                                disabled={!isStepValid()}
+                            >
+                                <Text style={textStyles.buttonText}>Next</Text>
+                            </TouchableOpacity>
+                        ) : (
+                            <Link href={"/(app)"}>
+                                <TouchableOpacity style={buttonStyles.button} onPress={handleSubmit}>
+                                    <Text style={textStyles.buttonText}>Submit</Text>
+                                </TouchableOpacity>
+                            </Link>
+                        )}
+                        {step > 1 && (
+                            <TouchableOpacity style={buttonStyles.button} onPress={handleBack}>
+                                <Text style={textStyles.buttonText}>Back</Text>
+                            </TouchableOpacity>
+                        )}
+                    </View>
+                </View>
             </View>
-        </ScrollView>
+        </View>
     );
 };
 
