@@ -21,7 +21,7 @@ export default function AppLayout() {
     return <Redirect href="/auth" />;
   }
 
-  if (profile.userData.newUser === 0) {
+  if (profile.userData.is_new_user === 0) {
     return <InitialForm />;
   }
 

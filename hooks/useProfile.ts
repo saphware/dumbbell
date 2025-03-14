@@ -10,7 +10,7 @@ export const useUser = (): User => {
         created_at: '2023-01-01T00:00:00Z',
         updated_at: '2023-01-10T00:00:00Z',
         role: 0,
-        newUser: 0,
+        is_new_user: 0,
     };
 }
 
