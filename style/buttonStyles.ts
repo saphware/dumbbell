@@ -114,6 +114,7 @@ export const buttonStyles = StyleSheet.create({
         borderWidth: 1,
         width: '100%',
         height: 52,
+        paddingHorizontal: 12,
     },
     buttonContent: {
         width: '100%',
@@ -133,5 +134,18 @@ export const buttonStyles = StyleSheet.create({
     },
     offStep: {
 
+    },
+    buttonHalf: {
+        backgroundColor: colors.sg2,
+        borderRadius: 5,
+        color: colors.sg2,
+        borderColor: colors.sg5,
+        display: "flex",
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        width: '50%',
+        height: 52,
+        textAlign: "center",
     }
 })
