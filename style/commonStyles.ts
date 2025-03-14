@@ -28,6 +28,9 @@ export const commonStyles = StyleSheet.create({
         backgroundColor: colors.sg1,
         color: colors.sg2,
     },
+    halfContent: {
+        width: "50%"
+    },
     container: {
         flex: 1,
         width: '100%',
