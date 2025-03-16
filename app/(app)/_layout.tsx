@@ -13,9 +13,9 @@ export default function AppLayout() {
     return <Text>Loading...</Text>;
   }
 
-  if (!session) {
+  /* if (!session) {
     return <Redirect href="/auth" />;
-  }
+  } */
 
   return (
     <SafeAreaProvider style={commonStyles.mainContainer}>
