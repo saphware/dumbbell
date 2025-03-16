@@ -6,4 +6,5 @@ export type User = {
     created_at: string;
     updated_at: string;
     role: number;
+    is_new_user: number;
 };
