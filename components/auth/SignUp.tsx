@@ -7,7 +7,9 @@ import { textStyles } from '@/style/textStyles';
 import { inputStyles } from '@/style/inputStyles';
 import { buttonStyles } from '@/style/buttonStyles';
 import { useAssets } from 'expo-asset';
+import { router } from 'expo-router';
 import Modal from '../modal';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
   
 const checkEmailWhitelist = async (email: string): Promise<[any, string]> => {
@@ -78,13 +80,16 @@ export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => v
                 }
             }
         })
-
+        
+        console.log(data)
         if (error) {
             setModalText(error.message)
             setModal(true)
-        } else if (!data.session) {
-            setModalText('Please check your inbox for email verification!')
-            setModal(true)
+        }
+
+        if (data?.user) {
+            await AsyncStorage.setItem('id_auth', data.user.id);
+            router.replace('/(app)');
         }
                 
         setLoading(false)
