@@ -56,7 +56,7 @@ export default function Home() {
 
   return (
     <View style={commonStyles.containerNavbars}>
-      {profile.userData.role === Role.Client ?
+      {profile?.userData.role === Role.Client ?
         <>
           <QuoteComponent />
           <FlatList
