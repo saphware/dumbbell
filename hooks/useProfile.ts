@@ -1,16 +1,36 @@
 import { Client, Coach, User } from "@/types";
 import { Role } from '@/constants/Roles';
+import { useState, useEffect } from "react";
+import { supabase } from '@/lib/supabase';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const useUser = (): User => {
-    return {
-        id: 1,
-        name: 'Joe',
-        id_company: 100,
-        id_auth: 2,
-        created_at: '2023-01-01T00:00:00Z',
-        updated_at: '2023-01-10T00:00:00Z',
-        role: 0,
-    };
+export const useUser = () => {
+    const [user, setUser] = useState<User | null>(null);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+        const userData = await AsyncStorage.getItem("user");
+        setUser(userData ? JSON.parse(userData) : null);
+        };
+        fetchUser();
+    }, []);
+
+    return user;
+};
+
+
+export const getUser = () => {
+
+    const [userData, setUset] = useState(null);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const { data: { user } } = await supabase.auth.getUser()
+            console.log(user);
+        }
+        fetchUser();
+    }, [])
+
 }
 
 export const useClient = (): Client => {
@@ -46,13 +66,11 @@ export const useCoach = (): Coach => {
 
 export const useProfile = () => {
     const userData = useUser();
+  
+    if (!userData) return null;
+  
     if (userData.role === Role.Client) {
-        const clientData = useClient();
-        return {
-            userData, clientData
-        }
+      return { userData, clientData: useClient() };
     }
-
-    const coachData = useCoach();
-    return { userData , coachData};
-};
+    return { userData, coachData: useCoach() };
+  };
