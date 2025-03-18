@@ -9,9 +9,9 @@ export const useUser = () => {
 
     useEffect(() => {
         const fetchUser = async () => {
-        const userData = await AsyncStorage.getItem("user");
-        setUser(userData ? JSON.parse(userData) : null);
-        };
+            const userData = await AsyncStorage.getItem("user");
+            setUser(userData ? JSON.parse(userData) : null);
+            };
         fetchUser();
     }, []);
 
