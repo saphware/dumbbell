@@ -92,6 +92,7 @@ export const buttonStyles = StyleSheet.create({
     overlay: {
         width: '100%',
         backgroundColor: "#00000080",
+        color: colors.sg2,
         textAlign: "center",
         position: "absolute",
         bottom: 0,

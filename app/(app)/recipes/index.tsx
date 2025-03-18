@@ -4,10 +4,30 @@ import { inputStyles } from '@/style/inputStyles'
 import { textStyles } from '@/style/textStyles'
 import { Link } from 'expo-router'
 import React, { useEffect, useState } from 'react'
-import { FlatList, Image, Text, TextInput, View } from 'react-native'
+import { FlatList, Image, Text, TextInput, View, ImageBackground, TouchableOpacity } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useRecipes } from '@/hooks/useRecipes'
 import AntDesign from '@expo/vector-icons/AntDesign';
+
+interface RecipeButtonProps {
+  title: string;
+  imageUrl: string;
+  id: string;
+}
+
+const RecipeButton: React.FC<RecipeButtonProps> = ({ title, imageUrl, id }) => (
+  <Link href={`/recipes/recipe/${id}`} style={buttonStyles.card}>
+    <ImageBackground
+      source={{ uri: imageUrl }}
+      style={buttonStyles.cardBackground}
+      imageStyle={{ borderRadius: 10 }}
+    >
+      <Text style={buttonStyles.overlay}>
+        {title}
+      </Text>
+    </ImageBackground>
+  </Link>
+);
 
 export default function recipes() {
   const { getRecipes } = useRecipes();
@@ -24,7 +44,7 @@ export default function recipes() {
       setLoading(false);
     };
     fetchRecipes();
-  }, []); 
+  }, []);
 
   useEffect(() => {
     if (searchQuery) {
@@ -61,17 +81,7 @@ export default function recipes() {
           style={buttonStyles.flatList}
           data={recipes as { id: string; title: string; image_url: string }[]}
           renderItem={({ item }: { item: { id: string; title: string; image_url: string } }) => (
-            <Link href={`/recipes/recipe/${item.id}`} style={buttonStyles.card}>
-              <View key={item.id} style={buttonStyles.overlay}>
-                <Text style={textStyles.textSm}>{item.title}</Text>
-              </View>
-              <Image
-                style={buttonStyles.cardBackground}
-                source={{
-                  uri: item.image_url,
-                }}
-              />
-            </Link>
+            <RecipeButton title={item.title} imageUrl={item.image_url} id={item.id} />
           )}
         />
       )}
