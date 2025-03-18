@@ -4,8 +4,8 @@ import { colors, commonStyles } from '@/style/commonStyles'
 import { textStyles } from '@/style/textStyles'
 import { Link } from 'expo-router'
 import { Role } from '@/constants/Roles';
-import React from 'react'
-import { FlatList, View, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-native'
+import React, { useState } from 'react'
+import { FlatList, View, Text, TextInput } from 'react-native'
 import { useRoutine } from '@/hooks/useRoutine' // Importar los datos simulados
 import { Image } from 'expo-image'
 import QuoteComponent from '@/components/Quotes'
@@ -16,10 +16,15 @@ import { inputStyles } from '@/style/inputStyles'
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function Home() {
-
+  const [searchQuery, setSearchQuery] = useState('');
   const profile = useProfile();
-  const routine = useRoutine()
+  const routine = useRoutine();
   const student = useStudent();
+
+  // Function to filter students based on search query
+  const filteredStudents = student.filter((s: { name: string }) => 
+    s.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   // Función para renderizar cada rutina
   const renderRoutine = ({ item }: { item: { id: number; title: string; image: string } }) => (
@@ -70,16 +75,16 @@ export default function Home() {
           <View style={inputStyles.input}>
             <TextInput
               style={inputStyles.inputText}
-              placeholder="Search recipes..."
+              placeholder="Search students..."
               placeholderTextColor={colors.sg4}
-            // value={searchQuery}
-            // onChangeText={setSearchQuery}
+              value={searchQuery}
+              onChangeText={setSearchQuery}
             />
             <AntDesign name="search1" size={24} color={colors.sg2} />
           </View>
           <FlatList
             style={buttonStyles.flatList}
-            data={student as unknown as { id: number; name: string; image: string }[]} // Asegúrate de que routine sea un array de rutinas
+            data={filteredStudents as unknown as { id: number; name: string; image: string }[]}
             renderItem={renderStudent}
             keyExtractor={item => item.id.toString()}
           />
@@ -89,30 +94,3 @@ export default function Home() {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: 'rgba(0, 51, 32, 0.7)', // Verde oscuro con transparencia
-    borderRadius: 10,
-    padding: 10,
-    margin: 10,
-    borderWidth: 1,
-    borderColor: 'white',
-  },
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  image: {
-    width: 40,
-    height: 40,
-    borderRadius: 10,
-    backgroundColor: '#D9B382',
-    marginRight: 10,
-  },
-  text: {
-    flex: 1,
-    color: 'white',
-    fontSize: 16,
-  },
-});
