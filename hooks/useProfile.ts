@@ -2,7 +2,6 @@ import { Client, Coach, User } from "@/types";
 import { Role } from '@/constants/Roles';
 import { useState, useEffect } from "react";
 import { supabase } from '@/lib/supabase';
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const useUser = () => {
     
@@ -20,7 +19,7 @@ export const useUser = () => {
             const { data: user, error } = await supabase
                 .from("user")
                 .select("*")
-                .eq("id_auth_user", supaUser.user.id)
+                .eq("id_auth", supaUser.user.id)
                 .single();
 
             if (error) {
