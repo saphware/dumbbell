@@ -5,33 +5,35 @@ import { supabase } from '@/lib/supabase';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const useUser = () => {
-    const [user, setUser] = useState<User | null>(null);
+    
+    const [userData, setUser] = useState<User | null>(null);
 
     useEffect(() => {
         const fetchUser = async () => {
-            const userData = await AsyncStorage.getItem("user");
-            setUser(userData ? JSON.parse(userData) : null);
-            };
+            const { data: supaUser, error: authError } = await supabase.auth.getUser();
+            
+            if (authError || !supaUser?.user) {
+                console.error("Error obteniendo usuario:", authError);        
+                return;
+            }
+
+            const { data: user, error } = await supabase
+                .from("user")
+                .select("*")
+                .eq("id_auth_user", supaUser.user.id)
+                .single();
+
+            if (error) {
+                console.error("Error obteniendo datos del usuario:", error);
+            } else {
+                setUser(user);
+            }
+        };
+
         fetchUser();
     }, []);
-
-    return user;
+    return userData;
 };
-
-
-export const getUser = () => {
-
-    const [userData, setUset] = useState(null);
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            const { data: { user } } = await supabase.auth.getUser()
-            console.log(user);
-        }
-        fetchUser();
-    }, [])
-
-}
 
 export const useClient = (): Client => {
     return {
