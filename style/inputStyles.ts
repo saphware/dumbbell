@@ -20,5 +20,22 @@ export const inputStyles = StyleSheet.create({
         minHeight: 52,
         fontWeight: 'normal',
         color: colors.sg2,
-    }
+    },
+    unitButton: {
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        marginHorizontal: 5,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: "#ccc",
+        backgroundColor: "#fff",
+    },
+    selectedButton: {
+        backgroundColor: "#007BFF", // Color de selección
+        borderColor: "#007BFF",
+    },
+    unitText: {
+        fontSize: 16,
+        color: "#333",
+    },
 })

@@ -62,6 +62,6 @@ export const textStyles = StyleSheet.create({
         fontWeight: 600,
         textAlign: 'left',
         width: '100%',
-        paddingLeft: 10
+        paddingLeft: 10,
     }
 })

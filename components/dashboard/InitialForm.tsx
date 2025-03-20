@@ -6,16 +6,42 @@ import { textStyles } from '@/style/textStyles';
 import { useAssets } from 'expo-asset';
 import { Link } from 'expo-router';
 import React, { useState } from 'react';
-import { Image } from 'react-native';
-import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { FlatList, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity} from 'react-native';
 
 type FormData = {
     name: string;
-    weight: string;
-    height: string;
+    weight: number;
+    height: number;
+    weight_unit: string;
+    height_unit: string;
+    /* current_activity: number;
+    target_activity: number;
+    goal: number;
+    target_weight: number; */
     extraInfo: string;
 };
+const weightUnits = [
+    {
+        id: 0,
+        unit: "kg"
+    },
+    {
+        id: 1,
+        unit: "lb"
+    }
+]
 
+const heightUnits = [
+    {
+        id: 0,
+        unit: "cm"
+    },
+    {
+        id: 1,
+        unit: "in"
+    }
+]
 const InitialForm: React.FC = () => {
     const [assets] = useAssets([
         require('@/assets/images/heroDumbbell.png'),
@@ -24,19 +50,29 @@ const InitialForm: React.FC = () => {
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState<FormData>({
         name: '',
-        weight: '',
-        height: '',
+        weight: 50,
+        height: 170,
+        weight_unit: 'kg',
+        height_unit: 'cm',
         extraInfo: '',
+        /* current_activity: 0,
+        target_activity: 0,
+        goal: 0,
+        target_weight: 0, */
     });
 
-    const updateFormData = (key: keyof FormData, value: string) => {
-        setFormData(prevData => ({ ...prevData, [key]: value }));
+    const updateFormData = (key: keyof FormData, value: string | number) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            [key]: value !== undefined ? value : "",
+        }));
+        console.log(formData)
     };
 
     const isStepValid = () => {
         switch (step) {
             case 1:
-                return formData.name.trim().length > 0;
+                return formData.name.trim().length > 0 || formData.weight > 0;
             case 2:
                 return !isNaN(Number(formData.weight)) && Number(formData.weight) > 0;
             case 3:
@@ -78,11 +114,34 @@ const InitialForm: React.FC = () => {
                         <View style={inputStyles.input}>
                             <TextInput
                                 style={inputStyles.inputText}
+                                value={formData.weight.toString() ?? ""} // Fallback para evitar undefined
                                 placeholderTextColor={colors.sg2}
-                                onChangeText={(text) => updateFormData('weight', text)}
+                                onChangeText={(text) => {
+                                    let num = parseFloat(text) || 0; 
+                                    if (num < 0) num = 0;                                
+                                    updateFormData('weight', num); 
+                                }}
                                 placeholder="Ingresa tu peso"
-                                keyboardType="numeric"
+                                keyboardType="numeric"                                
+                                inputMode="numeric" 
                             />
+
+                    <FlatList
+                        data={weightUnits}
+                        keyExtractor={(item) => item.id.toString()}
+                        horizontal
+                        renderItem={({ item }) => (
+                            <TouchableOpacity    
+                                style={[
+                                    inputStyles.unitButton,
+                                    formData.weight_unit === item.unit && inputStyles.selectedButton
+                                ]}                    
+                                onPress={() => updateFormData('height_unit', item.unit)}
+                            >
+                                <Text style={inputStyles.unitText}>{item.unit}</Text>
+                            </TouchableOpacity>
+                        )}
+                        />
                         </View>
                     </>
                 );
@@ -92,37 +151,40 @@ const InitialForm: React.FC = () => {
                         <View style={inputStyles.input}>
                             <TextInput
                                 style={inputStyles.inputText}
-                                placeholderTextColor={colors.sg2}
-                                onChangeText={(text) => updateFormData('weight', text)}
-                                placeholder="Ingresa tu peso"
-                                keyboardType="numeric"
-                            />
-                        </View>
-                        <View style={inputStyles.input}>
-                            <TextInput
-                                style={inputStyles.inputText}
-                                placeholderTextColor={colors.sg2}
-                                value={formData.height}
-                                onChangeText={(text) => updateFormData('height', text)}
+                                placeholderTextColor={colors.sg2}       
+                                value={formData.height.toString() ?? ""} // Fallback para evitar undefined               
+                                onChangeText={(text) => {
+                                    let num = parseFloat(text) || 0; 
+                                    if (num < 0) num = 10;        
+                                    if (num > 300) num = 300                        
+                                    updateFormData('height', num); 
+                                }}
                                 placeholder="Ingresa tu altura"
                                 keyboardType="numeric"
                             />
+                            <FlatList
+                        data={heightUnits}
+                        keyExtractor={(item) => item.id.toString()}
+                        horizontal
+                        renderItem={({ item }) => (
+                            <TouchableOpacity    
+                                style={[
+                                    inputStyles.unitButton,
+                                    formData.height_unit === item.unit && inputStyles.selectedButton
+                                ]}                    
+                                onPress={() => updateFormData('height_unit', item.unit)}
+                            >
+                                <Text style={inputStyles.unitText}>{item.unit}</Text>
+                            </TouchableOpacity>
+                        )}
+                        /> 
                         </View>
+                                                                   
                     </>
                 );
             case 3:
                 return (
-                    <>
-                        <View style={inputStyles.input}>
-                            <TextInput
-                                style={inputStyles.inputText}
-                                placeholderTextColor={colors.sg2}
-                                value={formData.height}
-                                onChangeText={(text) => updateFormData('height', text)}
-                                placeholder="Ingresa tu altura"
-                                keyboardType="numeric"
-                            />
-                        </View>
+                    <>                        
                         <View style={inputStyles.input}>
                             <TextInput
                                 style={inputStyles.inputText}
@@ -160,11 +222,11 @@ const InitialForm: React.FC = () => {
                                 <Text style={textStyles.buttonText}>Next</Text>
                             </TouchableOpacity>
                         ) : (
-                            <Link href={"/(app)"}>
-                                <TouchableOpacity style={buttonStyles.button} onPress={handleSubmit}>
-                                    <Text style={textStyles.buttonText}>Submit</Text>
-                                </TouchableOpacity>
-                            </Link>
+                            <TouchableOpacity style={buttonStyles.button} onPress={handleSubmit}>
+                                <Link href={"/(app)"}>                                
+                                    <Text style={textStyles.buttonText}>Submit</Text>                            
+                                </Link>
+                            </TouchableOpacity>
                         )}
                         {step > 1 && (
                             <TouchableOpacity style={buttonStyles.button} onPress={handleBack}>
