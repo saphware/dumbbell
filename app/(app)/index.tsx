@@ -6,7 +6,7 @@ import { Link } from 'expo-router'
 import { Role } from '@/constants/Roles';
 import React, { useState } from 'react'
 import { FlatList, View, Text, TextInput } from 'react-native'
-import { useRoutine } from '@/hooks/useRoutine' // Importar los datos simulados
+import { useRoutine } from '@/hooks/useRoutine'
 import { Image } from 'expo-image'
 import QuoteComponent from '@/components/Quotes'
 import { useStudent } from '@/hooks/useStudent'
