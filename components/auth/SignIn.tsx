@@ -7,7 +7,7 @@ import { textStyles } from '@/style/textStyles';
 import { buttonStyles } from '@/style/buttonStyles';
 import { inputStyles } from '@/style/inputStyles';
 import { useAssets } from 'expo-asset';
-import Modal from '../modal';
+import Modal from '../Modal';
 
 export default function SignIn({ setSignIn }: { setSignIn: (value: boolean) => void }) {
 
