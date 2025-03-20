@@ -32,7 +32,10 @@ export default function SignIn({ setSignIn }: { setSignIn: (value: boolean) => v
     ]);
 
     const handleSignIn = async () => {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+        console.log(data)
+
         if (error) {
             setType(false)
             setModalText(error.message);

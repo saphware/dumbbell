@@ -20,7 +20,7 @@ const InitialForm: React.FC = () => {
     const [assets] = useAssets([
         require('@/assets/images/heroDumbbell.png'),
     ]);
-    const profile = useProfile();
+    const {user, profile} = useProfile();
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState<FormData>({
         name: '',

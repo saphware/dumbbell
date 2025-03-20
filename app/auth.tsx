@@ -7,7 +7,6 @@ import SignUp from "@/components/auth/SignUp";
 export default function Auth() {
 
     const [signIn, setSignIn] = useState(true)
-
     return (
         <SafeAreaView style={commonStyles.mainContainer}>
             {
