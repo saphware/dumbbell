@@ -8,8 +8,9 @@ import { inputStyles } from '@/style/inputStyles';
 import { buttonStyles } from '@/style/buttonStyles';
 import { colors } from '@/style/commonStyles';
 import { useAssets } from 'expo-asset';
-import Modal from '../modal';
+import Modal from '../Modal';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { router } from 'expo-router';
 
   
 const checkEmailWhitelist = async (email: string): Promise<[any, string]> => {
@@ -88,16 +89,16 @@ export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => v
         setIsFormValid(Object.keys(newErrors).length === 0);
     }
 
-    const handleSignUp = async () => {        
+    const handleSignUp = async () => {      
         setLoading(true)
-        if (isFormValid) {
+        if (!isFormValid) {
             setLoading(false)
             return;
         }
         
         
         const [userEmailResponse, errorMessage] = await checkEmailWhitelist(email);
-
+        
         if (errorMessage !== "") {
             setModalText(errorMessage)
             setModal(true)
@@ -127,7 +128,8 @@ export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => v
         }
 
         if (data?.user) {
-            await AsyncStorage.setItem('id_auth', data.user.id);        
+            await AsyncStorage.setItem('id_auth', data.user.id);  
+            router.push('/initialForm')      
         }
                 
         setLoading(false)
