@@ -55,5 +55,13 @@ export const textStyles = StyleSheet.create({
         fontWeight: 'light',
         textAlign: 'center',
         // marginBottom: 12,
+    },
+    error: {
+        color: 'red', 
+        marginTop: 5, 
+        fontWeight: 600,
+        textAlign: 'left',
+        width: '100%',
+        paddingLeft: 10
     }
 })
