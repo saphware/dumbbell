@@ -3,6 +3,7 @@
 ## Versión [0.1.0] - 2025-02-06
 
 ### Nuevas Funcionalidades
+- **[DMB-49]** Se implementa la funcionalidad del formulario inicial y la subida de datos a la base de datos. *(fran)*
 - **[DMB-40]** Se implementa la funcionalidad de verificar el mail en la base y la creacion del usuario con el role y el id company. *(fran)*
 - **[DMB-46]** Se persiste la información del usuario a traves de la aplicación. *(fran)*
 - **[DMB-2]** Se creo el *formulario inicial* para nuevos usuarios. *(jere)*
