@@ -6,3 +6,4 @@ export * from './exercise';
 export * from './apiResponses';
 export * from './routineExercise';
 export * from './recipe';
+export * from './initialForm';
