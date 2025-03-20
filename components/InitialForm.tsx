@@ -4,23 +4,14 @@ import { colors, commonStyles } from '@/style/commonStyles';
 import { inputStyles } from '@/style/inputStyles';
 import { textStyles } from '@/style/textStyles';
 import { useAssets } from 'expo-asset';
-import { Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { FlatList, Image } from 'react-native';
-import { View, Text, TextInput, TouchableOpacity} from 'react-native';
+import { FlatList, Image, Text, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View } from "react-native";
+import { InitialFormData } from '@/types';
+import { updateUserClientByInitialForm } from "@/hooks/useClient";
+import Modal from '@/components/Modal';
 
-type FormData = {
-    name: string;
-    weight: number;
-    height: number;
-    weight_unit: string;
-    height_unit: string;
-    /* current_activity: number;
-    target_activity: number;
-    goal: number;
-    target_weight: number; */
-    extraInfo: string;
-};
 const weightUnits = [
     {
         id: 0,
@@ -43,25 +34,30 @@ const heightUnits = [
     }
 ]
 const InitialForm: React.FC = () => {
+    const router = useRouter();
     const [assets] = useAssets([
         require('@/assets/images/heroDumbbell.png'),
     ]);
     const {user, profile} = useProfile();
     const [step, setStep] = useState(1);
-    const [formData, setFormData] = useState<FormData>({
+    const [loading, setLoading] = useState(false);
+    const [modal, setModal] = useState(false);
+    const [type, setType] = useState(false);
+    const [modalText, setModalText] = useState('Please try again later');
+
+    const [formData, setFormData] = useState<InitialFormData>({
         name: '',
         weight: 50,
         height: 170,
         weight_unit: 'kg',
-        height_unit: 'cm',
-        extraInfo: '',
+        height_unit: 'cm',        
         /* current_activity: 0,
         target_activity: 0,
         goal: 0,
         target_weight: 0, */
     });
 
-    const updateFormData = (key: keyof FormData, value: string | number) => {
+    const updateFormData = (key: keyof InitialFormData, value: string | number) => {
         setFormData((prevData) => ({
             ...prevData,
             [key]: value !== undefined ? value : "",
@@ -92,9 +88,18 @@ const InitialForm: React.FC = () => {
         setStep(prevStep => prevStep - 1);
     };
 
-    const handleSubmit = () => {
-        console.log('Form submitted:', formData);
-        // Here you would typically send the data to an API or perform some action
+    const handleSubmit = async () => {
+        setLoading(true)        
+        let {error} = await updateUserClientByInitialForm(user?.id, formData)
+        
+        if (!error){                        
+            router.push("/(app)");
+        }  else {
+            setModalText(error.message);
+            setModal(true)
+        }    
+        setLoading(false)
+        
     };
 
     const renderStep = () => {
@@ -182,7 +187,7 @@ const InitialForm: React.FC = () => {
                                                                    
                     </>
                 );
-            case 3:
+            /* case 3:
                 return (
                     <>                        
                         <View style={inputStyles.input}>
@@ -197,7 +202,7 @@ const InitialForm: React.FC = () => {
                             />
                         </View>
                     </>
-                );
+                ); */
             default:
                 return null;
         }
@@ -206,6 +211,7 @@ const InitialForm: React.FC = () => {
     return (
         <View style={commonStyles.mainContainer}>
             <View style={commonStyles.container}>
+            <Modal message={modalText} type={!type ? "error" : "success"} isVisible={modal} />
                 <View style={commonStyles.containerBetween}>
                     {/* @ts-ignore */}
                     <Image source={assets?.[0]} />
@@ -223,9 +229,12 @@ const InitialForm: React.FC = () => {
                             </TouchableOpacity>
                         ) : (
                             <TouchableOpacity style={buttonStyles.button} onPress={handleSubmit}>
-                                <Link href={"/(app)"}>                                
+                                {loading ?  <>
+                                    <ActivityIndicator size="large" color={colors.sg1} />
+                                </>:
                                     <Text style={textStyles.buttonText}>Submit</Text>                            
-                                </Link>
+                                }
+                                
                             </TouchableOpacity>
                         )}
                         {step > 1 && (
