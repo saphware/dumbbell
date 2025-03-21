@@ -27,3 +27,4 @@
 - **[DMB-2]** Se creo el *formulario inicial* para nuevos usuarios. *(jere)*
 - **[DMB-4]** Se establecieron las preguntas iniciales y el paso a paso, ademas se modifico el usuario añadiendo la propiedad "newUser". *(jere)*
 - **[DMB-1]** Se alineo la Actividad / Ejercicio con el del Figma y se creo el componente de select dropdown. *(jere)*
+- **[DMB-42]** Se crearon los *Skeleton Components*. *(jere)*

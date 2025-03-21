@@ -19,6 +19,8 @@ export const colors = {
     sg3: '#CBAA7B',
     sg4: '#92948A',
     sg5: '#132B24',
+    skeletonbg: '#132B24',
+    skeletonhl: '#1C352E',
 }
 
 export const commonStyles = StyleSheet.create({

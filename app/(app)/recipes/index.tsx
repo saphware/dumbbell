@@ -1,13 +1,13 @@
 import { buttonStyles } from '@/style/buttonStyles'
 import { colors, commonStyles } from '@/style/commonStyles'
 import { inputStyles } from '@/style/inputStyles'
-import { textStyles } from '@/style/textStyles'
 import { Link } from 'expo-router'
 import React, { useEffect, useState } from 'react'
 import { FlatList, Image, Text, TextInput, View, ImageBackground, TouchableOpacity } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useRecipes } from '@/hooks/useRecipes'
 import AntDesign from '@expo/vector-icons/AntDesign';
+import SkeletonLoading from 'expo-skeleton-loading'
 
 interface RecipeButtonProps {
   title: string;
@@ -71,11 +71,13 @@ export default function recipes() {
         />
         <AntDesign name="search1" size={24} color={colors.sg2} />
       </View>
-
       {loading ? (
-        <Text style={textStyles.textLg}>
-          Loading...
-        </Text>
+        // @ts-ignore
+        <SkeletonLoading background={colors.skeletonbg} highlight={colors.skeletonhl}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={{ width: "100%", height: 80, backgroundColor: "#adadad", borderRadius: 10, marginVertical: 8 }} />
+          </View>
+        </SkeletonLoading>
       ) : (
         <FlatList
           style={buttonStyles.flatList}

@@ -69,6 +69,13 @@ export const buttonStyles = StyleSheet.create({
         alignItems: 'center',
         overflow: 'hidden',
     },
+    skeletonCard: {
+        borderRadius: 8,
+        width: '100%',
+        height: 80,
+        marginVertical: 8,
+        alignItems: 'center',
+    },
     studentCard: {
         borderRadius: 10,
         padding: 4,

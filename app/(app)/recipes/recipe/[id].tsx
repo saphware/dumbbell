@@ -8,6 +8,7 @@ import { useRecipes } from '@/hooks/useRecipes';
 import { Image } from 'expo-image';
 import Markdown from 'react-native-markdown-display';
 import React from 'react';
+import SkeletonLoading from 'expo-skeleton-loading'
 
 export default function recipe() {
 
@@ -63,10 +64,14 @@ export default function recipe() {
 
   return (
     <SafeAreaProvider style={commonStyles.containerNavbars}>
+
       {loading ? (
-        <Text style={textStyles.textLg}>
-          Loading...
-        </Text>
+        // @ts-ignore
+        <SkeletonLoading background={colors.skeletonbg} highlight={colors.skeletonhl}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={{ width: "100%", height: 240, backgroundColor: "#adadad", borderRadius: 10, marginVertical: 8 }} />
+          </View>
+        </SkeletonLoading>
       ) : (
         <>
           {
