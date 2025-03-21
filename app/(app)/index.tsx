@@ -38,7 +38,7 @@ const RenderRoutine: React.FC<RenderRoutineButtonProps> = ({ name, image, id }) 
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
-  const profile = useProfile();
+  const {user, profile} = useProfile();
   const routine = useRoutine();
   const student = useStudent();
 
@@ -68,7 +68,7 @@ export default function Home() {
 
   return (
     <View style={commonStyles.containerNavbars}>
-      {profile.userData.role === Role.Client ?
+      {user?.role === Role.Client ?
         <>
           <QuoteComponent />
           <FlatList

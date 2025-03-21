@@ -26,7 +26,7 @@ export default function activity() {
   ]
 
   const { id } = useLocalSearchParams();
-  const profile = useProfile();
+  const {user, profile} = useProfile();
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -34,7 +34,7 @@ export default function activity() {
         {
           id ? (
             <>
-              {profile.userData.role === Role.Client ?
+              {user?.role === Role.Client ?
                 <View style={buttonStyles.buttonBorder}>
                   <View style={commonStyles.containerStart}>
                     <Text style={textStyles.titleSm}>Day</Text>

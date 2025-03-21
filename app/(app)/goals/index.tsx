@@ -6,19 +6,20 @@ import { textStyles } from '@/style/textStyles';
 import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import React, { useEffect, useState } from 'react';
+import { Client, User } from '@/types';
 
 export default function goals() {
-  const profile = useProfile();
+  const {user, profile: client} = useProfile() as {user: User; profile: Client};
   const daysInAWeek = 7;
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!profile) {
+    if (!client) {
       setLoading(true)
     } else {
       setLoading(false)
     }
-  }, [profile]);
+  }, [client]);
 
   return (
     <View style={commonStyles.containerNavbars}>
@@ -41,7 +42,7 @@ export default function goals() {
                 {[...Array(daysInAWeek)].map((_, index) => (
                   <MaterialCommunityIcons name="kettlebell"
                     size={40}
-                    color={index < (profile.clientData?.streak || 0) ? colors.sg3 : colors.sg4} />
+                    color={index < (client?.streak || 0) ? colors.sg3 : colors.sg4} />
                 ))}
               </>
             )}
@@ -56,7 +57,7 @@ export default function goals() {
             <TextInput
               style={inputStyles.inputText}
               placeholderTextColor={colors.sg2}
-              placeholder={`${profile.clientData?.goal}`}
+              placeholder={`${client?.goal}`}
               keyboardType="numeric"
             />
           </View>
