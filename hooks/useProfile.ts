@@ -9,7 +9,7 @@ export const useUser = (): User => {
         id_auth: 2,
         created_at: '2023-01-01T00:00:00Z',
         updated_at: '2023-01-10T00:00:00Z',
-        role: 0,
+        role: 1,
         is_new_user: 1,
     };
 }

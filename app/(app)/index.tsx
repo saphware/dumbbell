@@ -5,7 +5,7 @@ import { textStyles } from '@/style/textStyles'
 import { Link } from 'expo-router'
 import { Role } from '@/constants/Roles';
 import React, { useState } from 'react'
-import { FlatList, View, Text, TextInput } from 'react-native'
+import { FlatList, View, Text, TextInput, ImageBackground } from 'react-native'
 import { useRoutine } from '@/hooks/useRoutine' // Importar los datos simulados
 import { Image } from 'expo-image'
 import QuoteComponent from '@/components/Quotes'
@@ -15,6 +15,27 @@ import { iconStyles } from '@/style/iconStyles'
 import { inputStyles } from '@/style/inputStyles'
 import AntDesign from '@expo/vector-icons/AntDesign';
 
+interface RenderRoutineButtonProps {
+  name: string;
+  image: string;
+  id: number;
+}
+
+// Función para renderizar cada rutina
+const RenderRoutine: React.FC<RenderRoutineButtonProps> = ({ name, image, id }) => (
+  <Link href={`/recipes/recipe/${id}`} style={buttonStyles.card}>
+    <ImageBackground
+      source={{ uri: image }}
+      style={buttonStyles.cardBackground}
+      imageStyle={{ borderRadius: 10 }}
+    >
+      <Text style={buttonStyles.overlay}>
+        {name}
+      </Text>
+    </ImageBackground>
+  </Link>
+);
+
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const profile = useProfile();
@@ -22,24 +43,10 @@ export default function Home() {
   const student = useStudent();
 
   // Function to filter students based on search query
-  const filteredStudents = student.filter((s: { name: string }) => 
+  const filteredStudents = student.filter((s: { name: string }) =>
     s.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Función para renderizar cada rutina
-  const renderRoutine = ({ item }: { item: { id: number; title: string; image: string } }) => (
-    <Link href={`/roadmap/${item.id}`} key={item.id} style={buttonStyles.card}>
-      <View key={item.id} style={buttonStyles.overlay}>
-        <Text style={textStyles.textSm}>{item.title}</Text>
-      </View>
-      <Image
-        style={buttonStyles.cardBackground}
-        source={{
-          uri: item.image,
-        }}
-      />
-    </Link>
-  );
 
   // Función para renderizar cada estudiante
   const renderStudent = ({ item }: { item: { id: number; name: string; image: string } }) => (
@@ -66,9 +73,10 @@ export default function Home() {
           <QuoteComponent />
           <FlatList
             style={buttonStyles.flatList}
-            data={routine as unknown as { id: number; title: string; image: string }[]} // Asegúrate de que routine sea un array de rutinas
-            renderItem={renderRoutine}
-            keyExtractor={item => item.id.toString()}
+            data={routine as { id: number; name: string; image: string }[]}
+            renderItem={({ item }: { item: { id: number; name: string; image: string } }) => (
+              <RenderRoutine name={item.name} image={item.image} id={item.id} />
+            )}
           />
         </> :
         <>
