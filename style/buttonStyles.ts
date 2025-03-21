@@ -69,6 +69,13 @@ export const buttonStyles = StyleSheet.create({
         alignItems: 'center',
         overflow: 'hidden',
     },
+    skeletonCard: {
+        borderRadius: 8,
+        width: '100%',
+        height: 80,
+        marginVertical: 8,
+        alignItems: 'center',
+    },
     studentCard: {
         borderRadius: 10,
         padding: 4,
@@ -92,6 +99,7 @@ export const buttonStyles = StyleSheet.create({
     overlay: {
         width: '100%',
         backgroundColor: "#00000080",
+        color: colors.sg2,
         textAlign: "center",
         position: "absolute",
         bottom: 0,

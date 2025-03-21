@@ -23,3 +23,8 @@
 - **[DMB-43]** Se estilo la **informacion personal**. *(jere)*
 - **[DMB-8]** Se generaron los **Quotes**. *(Jere)*
 - **[DMB-12]** Se genero el **listado del /Home** tanto para coach como para estudiantes. *(jere)*
+- **[DMB-40]** Se implementa la funcionalidad de verificar el mail en la base y la creacion del usuario con el role y el id company. *(fran)*
+- **[DMB-2]** Se creo el *formulario inicial* para nuevos usuarios. *(jere)*
+- **[DMB-4]** Se establecieron las preguntas iniciales y el paso a paso, ademas se modifico el usuario añadiendo la propiedad "newUser". *(jere)*
+- **[DMB-1]** Se alineo la Actividad / Ejercicio con el del Figma y se creo el componente de select dropdown. *(jere)*
+- **[DMB-42]** Se crearon los *Skeleton Components*. *(jere)*

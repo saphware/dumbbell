@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react';
-import { Text, ScrollView } from 'react-native';
+import { ReactNode, useEffect, useState } from 'react';
+import { Text, ScrollView, View } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
-import { commonStyles } from '@/style/commonStyles';
+import { colors, commonStyles } from '@/style/commonStyles';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { textStyles } from '@/style/textStyles';
 import { useRecipes } from '@/hooks/useRecipes';
 import { Image } from 'expo-image';
 import Markdown from 'react-native-markdown-display';
 import React from 'react';
+import SkeletonLoading from 'expo-skeleton-loading'
 
 export default function recipe() {
 
@@ -26,19 +27,51 @@ export default function recipe() {
   }, [id]);
 
   const MarkdownText = ({ content }: { content: string }) => {
+    const customRenderRules = {
+      bullet_list: (node: any, children: ReactNode[]) => (
+        <View style={{ paddingLeft: 20 }}>
+          {children}
+        </View>
+      ),
+      ordered_list: (node: any, children: ReactNode[]) => (
+        <View style={{ paddingLeft: 20 }}>
+          {children}
+        </View>
+      ),
+      list_item: (node: any, children: ReactNode[]) => (
+        <Text style={{ color: colors.sg2 }}>
+          {node.type === 'bullet_list' ? '• ' : `${node.index + 1}. `}
+          {children}
+        </Text>
+      ),
+    };
+
     return (
       <Text style={textStyles.textLg}>
-        <Markdown>{content}</Markdown>
+        <Markdown
+          style={{
+            text: { color: colors.sg2 },
+            paragraph: { color: colors.sg2 },
+            heading: { color: colors.sg2 },
+          }}
+          rules={customRenderRules}
+        >
+          {content}
+        </Markdown>
       </Text>
     );
   }
 
   return (
     <SafeAreaProvider style={commonStyles.containerNavbars}>
+
       {loading ? (
-        <Text style={textStyles.textLg}>
-          Loading...
-        </Text>
+        // @ts-ignore
+        <SkeletonLoading background={colors.skeletonbg} highlight={colors.skeletonhl}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={{ width: "100%", height: 240, backgroundColor: "#adadad", borderRadius: 10, marginVertical: 8 }} />
+          </View>
+        </SkeletonLoading>
       ) : (
         <>
           {
@@ -56,9 +89,9 @@ export default function recipe() {
                   }}
                 />
 
+                {/* <Text style={textStyles.textLg}>{recipe.description}</Text> */}
                 {/* @ts-ignore */}
-                <Text style={textStyles.textLg}>{recipe.description}</Text>
-                {/* <MarkdownText content={recipe.description} /> */}
+                <MarkdownText content={recipe.description} />
 
               </ScrollView>
             ) : (
@@ -72,3 +105,17 @@ export default function recipe() {
     </SafeAreaProvider>
   );
 }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     marginTop: 50,
+//   },
+//   bigBlue: {
+//     color: 'blue',
+//     fontWeight: 'bold',
+//     fontSize: 30,
+//   },
+//   red: {
+//     color: 'red',
+//   },
+// });
