@@ -3,6 +3,11 @@
 ## Versión [0.1.0] - 2025-02-06
 
 ### Nuevas Funcionalidades
+- **[DMB-40]** Se implementa la funcionalidad de verificar el mail en la base y la creacion del usuario con el role y el id company. *(fran)*
+- **[DMB-2]** Se creo el *formulario inicial* para nuevos usuarios. *(jere)*
+- **[DMB-4]** Se establecieron las preguntas iniciales y el paso a paso, ademas se modifico el usuario añadiendo la propiedad "newUser". *(jere)*
+- **[DMB-1]** Se alineo la Actividad / Ejercicio con el del Figma y se creo el componente de select dropdown. *(jere)*
+- **[DMB-42]** Se crearon los *Skeleton Components*. *(jere)*
 - **[DMB-49]** Se implementa la funcionalidad del formulario inicial y la subida de datos a la base de datos. *(fran)*
 - **[DMB-40]** Se implementa la funcionalidad de verificar el mail en la base y la creacion del usuario con el role y el id company. *(fran)*
 - **[DMB-46]** Se persiste la información del usuario a traves de la aplicación. *(fran)*
