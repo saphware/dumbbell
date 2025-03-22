@@ -17,7 +17,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
-  const {user, profile} = useProfile();
+  const {user} = useProfile();
   const routine = useRoutine();
   const student = useStudent();
 
