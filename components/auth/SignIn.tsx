@@ -7,7 +7,7 @@ import { textStyles } from '@/style/textStyles';
 import { buttonStyles } from '@/style/buttonStyles';
 import { inputStyles } from '@/style/inputStyles';
 import { useAssets } from 'expo-asset';
-import Modal from '../modal';
+import Modal from '../Modal';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function SignIn({ setSignIn }: { setSignIn: (value: boolean) => void }) {
@@ -33,7 +33,10 @@ export default function SignIn({ setSignIn }: { setSignIn: (value: boolean) => v
     ]);
 
     const handleSignIn = async () => {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+        console.log(data)
+
         if (error) {
             setType(false)
             setModalText(error.message);

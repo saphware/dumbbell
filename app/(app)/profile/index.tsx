@@ -15,7 +15,7 @@ import IconButton from '@/components/buttons/IconButton'
 
 export default function Profile() {
 
-  const profile = useProfile();
+  const {user, profile} = useProfile();
 
   const handleSignOut = async () => {
     const { error } = await supabase.auth.signOut();
@@ -29,10 +29,10 @@ export default function Profile() {
 
         <View key={1} style={commonStyles.content}>
 
-          {profile.userData.role === Role.Client &&
+          {user?.role === Role.Client &&
             <>
               <Image
-                source={{ uri: profile.clientData?.user_image }}
+                source={{ uri: profile?.user_image }}
                 style={{ width: 120, height: 120, borderRadius: 60, backgroundColor: colors.sg2, marginVertical: 6 }}
               />
 
@@ -40,7 +40,7 @@ export default function Profile() {
                 <TextInput
                   style={inputStyles.inputText}
                   placeholderTextColor={colors.sg2}
-                  placeholder={`${profile.userData?.name}`}
+                  placeholder={`${user?.name}`}
                   keyboardType="numeric"
                 />
               </View>
@@ -49,7 +49,7 @@ export default function Profile() {
                 <TextInput
                   style={inputStyles.inputText}
                   placeholderTextColor={colors.sg2}
-                  placeholder={`${profile.clientData?.streak}`}
+                  placeholder={`${profile?.streak}`}
                   keyboardType="numeric"
                 />
               </View>
@@ -58,7 +58,7 @@ export default function Profile() {
                 <TextInput
                   style={inputStyles.inputText}
                   placeholderTextColor={colors.sg2}
-                  placeholder={`${profile.clientData?.goal}`}
+                  placeholder={`${profile?.goal}`}
                   keyboardType="numeric"
                 />
               </View>
@@ -67,7 +67,7 @@ export default function Profile() {
                 <TextInput
                   style={inputStyles.inputText}
                   placeholderTextColor={colors.sg2}
-                  placeholder={`${profile.clientData?.weight}`}
+                  placeholder={`${profile?.weight}`}
                   keyboardType="numeric"
                 />
               </View>
@@ -76,7 +76,7 @@ export default function Profile() {
                 <TextInput
                   style={inputStyles.inputText}
                   placeholderTextColor={colors.sg2}
-                  placeholder={`${profile.clientData?.height}`}
+                  placeholder={`${profile?.height}`}
                   keyboardType="numeric"
                 />
               </View>
@@ -84,20 +84,20 @@ export default function Profile() {
             </>
           }
           
-          {profile.userData.role === Role.Coach &&
+          {user?.role === Role.Coach &&
             <>
               <Image
-                source={{ uri: profile.coachData?.user_image }}
+                source={{ uri: profile?.user_image }}
                 style={{ width: 120, height: 120, borderRadius: 60 }}
               />
               <TextInput
                 style={inputStyles.input}
-                placeholder={`${profile.userData?.name}`}
+                placeholder={`${profile?.name}`}
                 keyboardType="numeric"
               />
               <TextInput
                 style={inputStyles.input}
-                placeholder={`${profile.coachData?.description}`}
+                placeholder={`${profile?.description}`}
                 keyboardType="numeric"
               />
             </>
@@ -107,7 +107,7 @@ export default function Profile() {
             <Text style={textStyles.buttonText}>Guardar</Text>
           </TouchableOpacity>
 
-          {profile.userData.role === Role.Coach &&
+          {user?.role === Role.Coach &&
             <Link href={"/(app)/coach"} style={commonStyles.content}>
               <IconButton icon='coach' text='Perfil de entrenador' onPress={undefined} />
             </Link>

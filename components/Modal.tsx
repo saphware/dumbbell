@@ -4,24 +4,24 @@ import { View, Text, StyleSheet } from 'react-native';
 interface ModalProps {
     message: string;
     type: 'success' | 'error';
-    isVisible: boolean; // New prop to control visibility
+    isVisible: boolean; 
 }
 
 const Modal: React.FC<ModalProps> = ({ message, type, isVisible }) => {
     const [visible, setVisible] = React.useState(isVisible);
 
     useEffect(() => {
-        setVisible(isVisible); // Update visibility based on isVisible prop
+        setVisible(isVisible); 
         if (isVisible) {
             const timer = setTimeout(() => {
                 setVisible(false);
-            }, 3000); // Close the modal after 3 seconds
+            }, 3000); 
 
-            return () => clearTimeout(timer); // Cleanup the timer on unmount
+            return () => clearTimeout(timer);
         }
-    }, [isVisible]); // Dependency on isVisible
+    }, [isVisible]); 
 
-    if (!visible) return null; // Render nothing if not visible
+    if (!visible) return null;
 
     return (
         <View style={[styles.modalContainer, type === 'success' ? styles.success : styles.error]}>
