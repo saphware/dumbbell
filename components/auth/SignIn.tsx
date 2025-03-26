@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
-import { commonStyles } from '@/style/commonStyles';
+import { colors, commonStyles } from '@/style/commonStyles';
 import { Link, router } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 import { textStyles } from '@/style/textStyles';
@@ -8,6 +8,7 @@ import { buttonStyles } from '@/style/buttonStyles';
 import { inputStyles } from '@/style/inputStyles';
 import { useAssets } from 'expo-asset';
 import Modal from '../Modal';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function SignIn({ setSignIn }: { setSignIn: (value: boolean) => void }) {
 
@@ -81,6 +82,12 @@ export default function SignIn({ setSignIn }: { setSignIn: (value: boolean) => v
                     <View style={commonStyles.containerEnd}>
                         <Text style={textStyles.span}>Olvide mi contraseña. Recuperar.</Text>
                     </View>
+
+                    <Text style={textStyles.span}>O ingresar con</Text>
+
+                    <TouchableOpacity style={buttonStyles.button} onPress={handleSignIn}>
+                        <Text style={textStyles.buttonText}><AntDesign name="google" size={24} color={colors.sg1} /></Text>
+                    </TouchableOpacity>
 
                     {/* <Text style={textStyles.span}>O iniciar con</Text> */}
 
