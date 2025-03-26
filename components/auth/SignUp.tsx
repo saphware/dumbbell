@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, Image, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, Image, ActivityIndicator, ScrollView, Platform, KeyboardAvoidingView } from 'react-native';
 import { commonStyles } from '@/style/commonStyles';
 import { Role } from '@/constants/Roles';
 import { supabase } from '@/lib/supabase';
@@ -12,23 +12,23 @@ import Modal from '../Modal';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from 'expo-router';
 
-  
+
 const checkEmailWhitelist = async (email: string): Promise<[any, string]> => {
     const { data, error } = await supabase
-      .rpc('is_email_whitelisted', { email_to_check: email });
-  
+        .rpc('is_email_whitelisted', { email_to_check: email });
+
     if (error) {
-      console.error('Error al verificar el email:', error.message);
-      return [null, error.message];
+        console.error('Error al verificar el email:', error.message);
+        return [null, error.message];
     }
-  
+
     return [data[0], ""];
-  };
+};
 
 type FormErrors = {
     email?: string,
     password?: string,
-    confirmPassword? : string,
+    confirmPassword?: string,
 }
 
 export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => void }) {
@@ -54,9 +54,9 @@ export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => v
     const [loading, setLoading] = useState(false)
     const [errors, setErrors] = useState<FormErrors>({})
     const [isFormValid, setIsFormValid] = useState(false);
-    
+
     const validateForm = (field: string) => {
-        let newErrors = {...errors};  
+        let newErrors = { ...errors };
 
         if (field == "email") {
             if (!email) {
@@ -89,49 +89,49 @@ export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => v
         setIsFormValid(Object.keys(newErrors).length === 0);
     }
 
-    const handleSignUp = async () => {      
+    const handleSignUp = async () => {
         setLoading(true)
         if (!isFormValid) {
             setLoading(false)
             return;
         }
-        
-        
+
+
         const [userEmailResponse, errorMessage] = await checkEmailWhitelist(email);
-        
+
         if (errorMessage !== "") {
             setModalText(errorMessage)
             setModal(true)
             return;
-        } 
-                
+        }
+
         if (!userEmailResponse.is_allowed) {
             setModalText("Tu email no se encuentra habilitado. Comuniquese con su empresa.")
             setModal(true)
             return;
-        } 
+        }
 
         const { data, error } = await supabase.auth.signUp({
             email: email,
             password: password,
             options: {
-                data: {                
+                data: {
                     "id_company": userEmailResponse.company_id,
-                    "role": Role.Client,                
+                    "role": Role.Client,
                 }
             }
         })
-        
+
         if (error) {
             setModalText(error.message)
             setModal(true)
         }
 
         if (data?.user) {
-            await AsyncStorage.setItem('id_auth', data.user.id);  
-            router.push('/initialForm')      
+            await AsyncStorage.setItem('id_auth', data.user.id);
+            router.push('/initialForm')
         }
-                
+
         setLoading(false)
     }
 
@@ -140,68 +140,78 @@ export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => v
     }
 
     return (
-        <View style={commonStyles.container}>
-            <View style={commonStyles.containerBetween}>
-                <Modal message={modalText} type={!type ? "error" : "success"} isVisible={modal} />
+        <KeyboardAvoidingView
+            style={{ flex: 1 }}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            keyboardVerticalOffset={Platform.select({ ios: 40, android: 40 })} // Adjusts for keyboard size
+        >
+            <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
+                <View style={commonStyles.container}>
+                    <View style={commonStyles.containerBetween}>
+                        <View style={commonStyles.containerBetween}>
+                            <Modal message={modalText} type={!type ? "error" : "success"} isVisible={modal} />
 
-                <View style={commonStyles.content}>
+                            <View style={commonStyles.content}>
 
-                    {/* @ts-ignore */}
-                    <Image source={assets?.[0]} />
+                                {/* @ts-ignore */}
+                                <Image source={assets?.[0]} />
 
-                    <Text style={textStyles.titleLg}>Dumbbell</Text>
+                                <Text style={textStyles.titleLg}>Dumbbell</Text>
 
-                    <TextInput
-                        style={inputStyles.input}
-                        placeholder="Correo electrónico"
-                        value={email}
-                        onChangeText={setEmail}
-                        autoCapitalize="none"                    
-                        keyboardType="email-address"
-                        placeholderTextColor='#DBD6C9'
-                        onBlur={() => validateForm("email")}
-                    />
-                    {errors.email ? <Text style={textStyles.error}>{errors.email}</Text> : null}
-                    
-                    <TextInput
-                        style={inputStyles.input}
-                        placeholder="Contraseña"
-                        value={password}
-                        onChangeText={setPassword}
-                        secureTextEntry
-                        placeholderTextColor='#DBD6C9'
-                        onBlur={() => validateForm("password")}
-                    />
-                    {errors.password ? <Text style={textStyles.error}>{errors.password}</Text> : null}
-                    <TextInput
-                        style={inputStyles.input}
-                        placeholder="Confirmar Contraseña"
-                        value={confirmPassword}
-                        onChangeText={setConfirmPassword}
-                        secureTextEntry
-                        placeholderTextColor='#DBD6C9'
-                        onBlur={() => validateForm("confirmPassword")}
-                    />
-                    {errors.confirmPassword ? <Text style={textStyles.error}>{errors.confirmPassword}</Text> : null}
+                                <TextInput
+                                    style={inputStyles.input}
+                                    placeholder="Correo electrónico"
+                                    value={email}
+                                    onChangeText={setEmail}
+                                    autoCapitalize="none"
+                                    keyboardType="email-address"
+                                    placeholderTextColor='#DBD6C9'
+                                    onBlur={() => validateForm("email")}
+                                />
+                                {errors.email ? <Text style={textStyles.error}>{errors.email}</Text> : null}
 
+                                <TextInput
+                                    style={inputStyles.input}
+                                    placeholder="Contraseña"
+                                    value={password}
+                                    onChangeText={setPassword}
+                                    secureTextEntry
+                                    placeholderTextColor='#DBD6C9'
+                                    onBlur={() => validateForm("password")}
+                                />
+                                {errors.password ? <Text style={textStyles.error}>{errors.password}</Text> : null}
+                                <TextInput
+                                    style={inputStyles.input}
+                                    placeholder="Confirmar Contraseña"
+                                    value={confirmPassword}
+                                    onChangeText={setConfirmPassword}
+                                    secureTextEntry
+                                    placeholderTextColor='#DBD6C9'
+                                    onBlur={() => validateForm("confirmPassword")}
+                                />
+                                {errors.confirmPassword ? <Text style={textStyles.error}>{errors.confirmPassword}</Text> : null}
+
+                            </View>
+
+                        </View>
+
+                        <View style={commonStyles.containerEnd}>
+                            <Text onPress={handleToggleSignIn} style={textStyles.span}>¿Ya tienes una cuenta? Inicia sesión</Text>
+                        </View>
+
+                        <TouchableOpacity style={buttonStyles.button}
+                            disabled={!isFormValid}
+                            onPress={handleSignUp}>
+                            {loading ? <>
+                                <ActivityIndicator size="large" color={colors.sg1} />
+                            </> :
+                                <Text style={textStyles.buttonText}>Registrarse</Text>
+                            }
+                        </TouchableOpacity>
+
+                    </View>
                 </View>
-
-            </View>
-
-            <View style={commonStyles.containerEnd}>
-                <Text onPress={handleToggleSignIn} style={textStyles.span}>¿Ya tienes una cuenta? Inicia sesión</Text>
-            </View>
-
-            <TouchableOpacity style={buttonStyles.button}  
-                disabled={!isFormValid}
-                onPress={handleSignUp}>
-                {loading ?  <>
-                    <ActivityIndicator size="large" color={colors.sg1} />
-                </>:
-                    <Text style={textStyles.buttonText}>Registrarse</Text>
-                }
-            </TouchableOpacity>
-
-        </View>
+            </ScrollView>
+        </KeyboardAvoidingView>
     );
 }

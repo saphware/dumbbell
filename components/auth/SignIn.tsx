@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, Image, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { commonStyles } from '@/style/commonStyles';
 import { Link, router } from 'expo-router';
 import { supabase } from '@/lib/supabase';
@@ -50,55 +50,63 @@ export default function SignIn({ setSignIn }: { setSignIn: (value: boolean) => v
     };
 
     return (
-        <View style={commonStyles.container}>
-            <View style={commonStyles.containerBetween}>
+        <KeyboardAvoidingView
+            style={{ flex: 1 }}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            keyboardVerticalOffset={Platform.select({ ios: 40, android: 40 })} // Adjusts for keyboard size
+        >
+            <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
+                <View style={commonStyles.container}>
+                    <View style={commonStyles.containerBetween}>
 
-                <Modal message={modalText} type={!type ? "error" : "success"} isVisible={modal} />
+                        <Modal message={modalText} type={!type ? "error" : "success"} isVisible={modal} />
 
-                <View style={commonStyles.content}>
-                    {/* @ts-ignore */}
-                    <Image source={assets?.[0]} />
+                        <View style={commonStyles.content}>
+                            {/* @ts-ignore */}
+                            <Image source={assets?.[0]} />
 
-                    <Text style={textStyles.titleLg}>Dumbbell</Text>
+                            <Text style={textStyles.titleLg}>Dumbbell</Text>
 
-                    <TextInput
-                        style={inputStyles.input}
-                        placeholder="Correo electrónico"
-                        value={email}
-                        onChangeText={setEmail}
-                        autoCapitalize="none"
-                        placeholderTextColor='#DBD6C9'
-                    />
-                    <TextInput
-                        style={inputStyles.input}
-                        placeholder="Contraseña"
-                        value={password}
-                        onChangeText={setPassword}
-                        secureTextEntry
-                        placeholderTextColor='#DBD6C9'
-                    />
+                            <TextInput
+                                style={inputStyles.input}
+                                placeholder="Correo electrónico"
+                                value={email}
+                                onChangeText={setEmail}
+                                autoCapitalize="none"
+                                placeholderTextColor='#DBD6C9'
+                            />
+                            <TextInput
+                                style={inputStyles.input}
+                                placeholder="Contraseña"
+                                value={password}
+                                onChangeText={setPassword}
+                                secureTextEntry
+                                placeholderTextColor='#DBD6C9'
+                            />
 
-                    <View style={commonStyles.containerEnd}>
-                        <Text style={textStyles.span}>Olvide mi contraseña. Recuperar.</Text>
+                            <View style={commonStyles.containerEnd}>
+                                <Text style={textStyles.span}>Olvide mi contraseña. Recuperar.</Text>
+                            </View>
+
+                            {/* <Text style={textStyles.span}>O iniciar con</Text> */}
+
+                            {/* <TouchableOpacity style={commonStyles.button} onPress={handleSignInWithGoogle}>
+                    <Text style={commonStyles.buttonText}>Google</Text>
+                    </TouchableOpacity> */}
+
+                        </View>
+
+                        <View style={commonStyles.containerEnd}>
+                            <Text onPress={handleToggleSignUp} style={textStyles.span}>¿No tienes una cuenta? Crear cuenta.</Text>
+                        </View>
+
+                        <TouchableOpacity style={buttonStyles.button} onPress={handleSignIn}>
+                            <Text style={textStyles.buttonText}>Iniciar Sesión</Text>
+                        </TouchableOpacity>
+
                     </View>
-
-                    {/* <Text style={textStyles.span}>O iniciar con</Text> */}
-
-                    {/* <TouchableOpacity style={commonStyles.button} onPress={handleSignInWithGoogle}>
-                <Text style={commonStyles.buttonText}>Google</Text>
-                </TouchableOpacity> */}
-
                 </View>
-
-                <View style={commonStyles.containerEnd}>
-                    <Text onPress={handleToggleSignUp} style={textStyles.span}>¿No tienes una cuenta? Crear cuenta.</Text>
-                </View>
-
-                <TouchableOpacity style={buttonStyles.button} onPress={handleSignIn}>
-                    <Text style={textStyles.buttonText}>Iniciar Sesión</Text>
-                </TouchableOpacity>
-
-            </View>
-        </View>
+            </ScrollView>
+        </KeyboardAvoidingView>
     );
 }

@@ -42,6 +42,7 @@ export const commonStyles = StyleSheet.create({
         paddingHorizontal: 18,
         paddingVertical: 18,
         gap: 6,
+        flexGrow: 1
     },
     scrollContainer: {
         width: '100%',
