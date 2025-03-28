@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, Image, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, Image, KeyboardAvoidingView, Platform, ScrollView, Keyboard } from 'react-native';
 import { commonStyles } from '@/style/commonStyles';
 import { Link, router } from 'expo-router';
 import { supabase } from '@/lib/supabase';
@@ -10,6 +10,27 @@ import { useAssets } from 'expo-asset';
 import Modal from '../Modal';
 
 export default function SignIn({ setSignIn }: { setSignIn: (value: boolean) => void }) {
+
+    const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+
+    useEffect(() => {
+        const showSubscription = Keyboard.addListener('keyboardDidShow', handleKeyboardShow);
+        const hideSubscription = Keyboard.addListener('keyboardDidHide', handleKeyboardHide);
+
+        return () => {
+            showSubscription.remove();
+        };
+    }, []);
+
+    // @ts-ignore
+    const handleKeyboardShow = event => {
+        setIsKeyboardVisible(true);
+    };
+
+    // @ts-ignore
+    const handleKeyboardHide = event => {
+        setIsKeyboardVisible(false);
+    };
 
     // Modal Display
     const [modal, setModal] = useState(false);
@@ -63,7 +84,8 @@ export default function SignIn({ setSignIn }: { setSignIn: (value: boolean) => v
 
                         <View style={commonStyles.content}>
                             {/* @ts-ignore */}
-                            <Image source={assets?.[0]} />
+
+                            {!isKeyboardVisible && <Image source={assets?.[0]} />}
 
                             <Text style={textStyles.titleLg}>Dumbbell</Text>
 

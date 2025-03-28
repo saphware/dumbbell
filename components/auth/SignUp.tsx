@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, Image, ActivityIndicator, ScrollView, Platform, KeyboardAvoidingView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, Image, ActivityIndicator, ScrollView, Platform, KeyboardAvoidingView, Keyboard } from 'react-native';
 import { commonStyles } from '@/style/commonStyles';
 import { Role } from '@/constants/Roles';
 import { supabase } from '@/lib/supabase';
@@ -32,9 +32,32 @@ type FormErrors = {
 }
 
 export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => void }) {
+
     const [modal, setModal] = useState(false);
     const [type, setType] = useState(false);
+    const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+
+    useEffect(() => {
+        const showSubscription = Keyboard.addListener('keyboardDidShow', handleKeyboardShow);
+        const hideSubscription = Keyboard.addListener('keyboardDidHide', handleKeyboardHide);
+
+        return () => {
+            showSubscription.remove();
+        };
+    }, []);
+
+    // @ts-ignore
+    const handleKeyboardShow = event => {
+        setIsKeyboardVisible(true);
+    };
+
+    // @ts-ignore
+    const handleKeyboardHide = event => {
+        setIsKeyboardVisible(false);
+    };
+
     const [modalText, setModalText] = useState('Please try again later');
+
     useEffect(() => {
         if (modal) {
             const timer = setTimeout(() => {
@@ -154,7 +177,7 @@ export default function SignUp({ setSignIn }: { setSignIn: (value: boolean) => v
                             <View style={commonStyles.content}>
 
                                 {/* @ts-ignore */}
-                                <Image source={assets?.[0]} />
+                                {!isKeyboardVisible && <Image source={assets?.[0]} />}
 
                                 <Text style={textStyles.titleLg}>Dumbbell</Text>
 
